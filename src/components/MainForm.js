@@ -33,7 +33,7 @@ class MainForm extends React.Component {
   async getLogs() {
     if (this.state.token) {
       try {
-        const response = await fetch("https://lo-api.herokuapp.com/logs", {
+        const response = await fetch("https://lo-app-api.herokuapp.com/logs", {
           headers: {
             "Authorization": 'Bearer ' + this.state.token
           }
@@ -52,7 +52,7 @@ class MainForm extends React.Component {
 
   addEntryHandler = async (id) => {
     try {
-      const response = await fetch(("https://lo-api.herokuapp.com/logs/" + id), {
+      const response = await fetch(("https://lo-app-api.herokuapp.com/logs/" + id), {
         method: 'POST',
         headers: {
           "Authorization": 'Bearer ' + this.state.token
@@ -74,7 +74,7 @@ class MainForm extends React.Component {
       alert("Enter Name");
     } else {
       try {
-        const response = await fetch("https://lo-api.herokuapp.com/logs", {
+        const response = await fetch("https://lo-app-api.herokuapp.com/logs", {
           method: 'POST',
           body: JSON.stringify({ name: logPrompt }),
           headers: {
@@ -94,7 +94,7 @@ class MainForm extends React.Component {
 
   removeLogHandler = async (id) => {
     try {
-      const response = await fetch(("https://lo-api.herokuapp.com/logs/" + id), {
+      const response = await fetch(("https://lo-app-api.herokuapp.com/logs/" + id), {
         method: 'DELETE',
         headers: {
           "Authorization": 'Bearer ' + this.state.token

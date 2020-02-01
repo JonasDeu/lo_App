@@ -17,7 +17,7 @@ class LoginPage extends Component {
             "password": this.state.password
         }
         try {
-            const response = await fetch("https://lo-api.herokuapp.com/users/login", {
+            const response = await fetch("https://lo-app-api.herokuapp.com/users/login", {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -43,7 +43,7 @@ class LoginPage extends Component {
             "password": this.state.password,
         }
         try {
-            const response = await fetch("https://lo-api.herokuapp.com/users", {
+            const response = await fetch("https://lo-app-api.herokuapp.com/users", {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

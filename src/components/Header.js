@@ -4,7 +4,7 @@ class Header extends Component {
 
     handleLogout = async () => {
         try {
-            const response = await fetch("https://lo-api.herokuapp.com/users/logout", {
+            const response = await fetch("https://lo-app-api.herokuapp.com/users/logout", {
                 method: 'POST',
                 headers: {
                     "Authorization": 'Bearer ' + this.props.userData.token
