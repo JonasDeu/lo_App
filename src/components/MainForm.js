@@ -69,7 +69,7 @@ class MainForm extends React.Component {
 
   addLogHandler = async (event) => {
     event.preventDefault();
-    var logPrompt = prompt("Please enter your name", "Bananas");
+    var logPrompt = prompt("Please enter log name", "Bananas");
     if (logPrompt == null || logPrompt === "") {
       alert("Enter Name");
     } else {
@@ -113,20 +113,31 @@ class MainForm extends React.Component {
     if (this.state.logs) {
       const temp = this.state.logs.map(log => {
         const timeDif = Math.abs(Math.round(((new Date(log.lastEntry) - Date.now()) / 60000)))
+        const color = "color-" + Math.floor(Math.random() * 6)
+        const colorHover = color + "-hover"
+
         return (
           <li className="logEntry" key={log._id}>
-            <div onClick={() => { this.addEntryHandler(log._id) }}>
-              <h2>{log.name}</h2>
-              {log.numEntries + " "}
+            <div className="logEntryInfo">
+              <div className="logEntryTitle">
+                <h2 className={color}>{log.name}</h2>
+                {log.numEntries + " "}
+              </div>
+
+              <span>{"since " + (new Date(log.date)).toLocaleDateString()}</span>
               <br />
-              {timeDif < 60 ? timeDif + "min ago" : Math.round((timeDif / 60)) + "h ago"}
-              <br />
-              {"since " + (new Date(log.date)).toLocaleDateString()}
+              <button className="removeButton" onClick={() => { this.removeLogHandler(log._id) }} >Remove</button >
             </div>
-            <button name={log.name} onClick={() => { this.removeLogHandler(log._id) }} >Remove</button >
+
+            <div className={"logEntryAdd " + colorHover} onClick={() => { this.addEntryHandler(log._id) }}>
+              <button className="addEntryButton" onClick={() => { this.addEntryHandler(log._id) }}>+</button>
+              <br />
+              {timeDif < 60 ? timeDif + "min" : Math.round((timeDif / 60)) + "h"}
+            </div>
           </li>
         )
       })
+
       return (
         <ul className="gridLogs">
           {temp}
@@ -148,7 +159,7 @@ class MainForm extends React.Component {
             <div className="gridMain">
               {this.state.token && this.logList()}
               <div>
-                Placeholder
+
               </div>
             </div>
           </div>

@@ -97,6 +97,8 @@ class LoginPage extends Component {
     render() {
         return (
             <div className="loginForm">
+                <h1 className={"color-" + Math.floor(Math.random() * 6)}>lo</h1>
+                <hr id="loginLine" />
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-control">
                         <label>Email</label>

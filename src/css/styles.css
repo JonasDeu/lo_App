@@ -1,19 +1,22 @@
+:root {
+    --main-bg-color: #1D1F28;
+    --main-fg-color: #282A36;
+    --main-txt-color: #FDFDFD;
+    --txt-color-0: #B043D1;
+    --txt-color-1: #18E3C8;
+    --txt-color-2: #FF4971;
+    --txt-color-3: #FF8037;
+    --txt-color-4: #B043D1;
+    --txt-color-5: #3FDCEE;
+}
+
+/*General*/
+
 body {
-    background-color: #1D1F28;
-    color: #FDFDFD;
+    background-color: var(--main-bg-color);
+    color: var(--main-txt-color);
     margin: 0px 50px;
-}
-
-header {
-    margin: 10px 0px;
-}
-
-#logoutButton {
-    float: right;
-}
-
-#errorButton {
-    margin-right: 5rem;
+    max-width: 2000px;
 }
 
 .gridMain {
@@ -24,6 +27,28 @@ header {
     gap: 8rem;
 }
 
+/*END General*/
+
+/*Main Layout*/
+
+header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 10px 0px;
+}
+
+#logoutButton {
+    text-align: right;
+}
+
+#title {
+    text-align: left;
+}
+
+#email {
+    text-align: center;
+}
+
 .gridLogs {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -32,9 +57,68 @@ header {
 }
 
 .logEntry {
-    background-color: #282A36;
+    background-color: var(--main-fg-color);
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 3px;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+
+.logEntryInfo {
+    display: table-cell;
+    width: 85%;
+    border-right: 2px solid var(--main-bg-color);
+    margin: 50px;
+    overflow: hidden;
+}
+
+.logEntryAdd {
+    display: table-cell;
+    width: 15%;
+    vertical-align: middle;
+    text-align: center;
+    padding-left: 12rem;
+    overflow: hidden;
+    font-size: 13rem;
+    cursor: pointer;
+}
+
+.logEntryAdd button {
+    font-size: 50rem;
+    margin-bottom: -15px;
+    cursor: pointer;
+}
+
+.logEntryTitle {
+    margin-bottom: 3rem;
+}
+
+.addEntryButton {
+    outline: none;
+}
+
+/*END Main Layout*/
+
+/*Login Form*/
+
+#loginLine {
+    margin-bottom: 15rem;
+}
+
+#loginButton {
+    border: 1px solid var(--main-txt-color);
+    background: none;
+    color: var(--main-txt-color);
+    padding: 2rem 10rem;
+    cursor: pointer;
+}
+
+#loginButton:hover {
+    border: 1px solid var(--main-txt-color);
+    background: var(--main-txt-color);
+    color: var(--main-bg-color);
+    padding: 2rem 10rem;
 }
 
 .loginForm {
@@ -52,14 +136,8 @@ header {
 }
 
 .form-checkbox label {
-    color: #FDFDFD;
     margin-left: 8px;
     margin-bottom: 50px;
-}
-
-.form-control label {
-    color: #FDFDFD;
-    display: block;
 }
 
 .form-control input {
@@ -75,14 +153,13 @@ header {
     outline: 0;
 }
 
-#loginButton {
-    border: 1px solid #FDFDFD;
-    background: none;
-    color: #FDFDFD;
-    padding: 2rem 10rem;
+#errorButton {
+    margin-right: 5rem;
 }
 
-@media only screen and (max-width: 1000px) {
+/*END Login Form*/
+
+@media only screen and (max-width: 900px) {
     body {
         margin: 0px 20px;
     }

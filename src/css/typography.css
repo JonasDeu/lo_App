@@ -5,19 +5,47 @@ html {
 
 body {
    font-family: Hack, monospace;
-   font-size: 14rem;
-   line-height: 1.8;
-   color: #222;
+   font-size: 18rem;
+   line-height: 1.4;
+   color: var(--main-txt-color);
 }
 
 h2 {
-   font-size: 24rem;
+   font-size: 26rem;
    display: inline;
    margin-right: 5rem;
    text-transform: lowercase;
-   color: #18E3C8;
+}
+
+h1 {
+   font-size: 120rem;
+   margin-bottom: 40rem;
 }
 
 .errorMessage {
-   color: #FF4971;
+   color: var(--txt-color-2);
+}
+
+.color-0, .color-0-hover:hover {
+   color: var(--txt-color-0);
+}
+
+.color-1, .color-1-hover:hover {
+   color: var(--txt-color-1);
+}
+
+.color-2, .color-2-hover:hover {
+   color: var(--txt-color-2);
+}
+
+.color-3, .color-3-hover:hover {
+   color: var(--txt-color-3);
+}
+
+.color-4, .color-4-hover:hover {
+   color: var(--txt-color-4);
+}
+
+.color-5, .color-5-hover:hover {
+   color: var(--txt-color-5);
 }
