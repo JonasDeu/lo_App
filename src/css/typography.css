@@ -1,0 +1,23 @@
+html {
+   font-size: 1px;
+   /*for using REM units*/
+}
+
+body {
+   font-family: Hack, monospace;
+   font-size: 14rem;
+   line-height: 1.8;
+   color: #222;
+}
+
+h2 {
+   font-size: 24rem;
+   display: inline;
+   margin-right: 5rem;
+   text-transform: lowercase;
+   color: #18E3C8;
+}
+
+.errorMessage {
+   color: #FF4971;
+}

@@ -1,0 +1,92 @@
+body {
+    background-color: #1D1F28;
+    color: #FDFDFD;
+    margin: 0px 50px;
+}
+
+header {
+    margin: 10px 0px;
+}
+
+#logoutButton {
+    float: right;
+}
+
+#errorButton {
+    margin-right: 5rem;
+}
+
+.gridMain {
+    margin-top: 20rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8rem;
+}
+
+.gridLogs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 8rem;
+    /*grid-template-rows: 200px;*/
+}
+
+.logEntry {
+    background-color: #282A36;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.loginForm {
+    margin: 50rem auto;
+}
+
+.form-control {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.form-checkbox {
+    margin-bottom: 10px;
+    background: none;
+}
+
+.form-checkbox label {
+    color: #FDFDFD;
+    margin-left: 8px;
+    margin-bottom: 50px;
+}
+
+.form-control label {
+    color: #FDFDFD;
+    display: block;
+}
+
+.form-control input {
+    border: 0;
+    border-radius: 2px;
+    display: block;
+    width: 200rem;
+    padding: 7px;
+    font-size: 14px;
+}
+
+.form-control input:focus {
+    outline: 0;
+}
+
+#loginButton {
+    border: 1px solid #FDFDFD;
+    background: none;
+    color: #FDFDFD;
+    padding: 2rem 10rem;
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+        margin: 0px 20px;
+    }
+    .gridMain {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
