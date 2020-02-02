@@ -15,6 +15,7 @@ h2 {
    display: inline;
    margin-right: 5rem;
    text-transform: lowercase;
+   color: var(--txt-color-3)
 }
 
 h1 {

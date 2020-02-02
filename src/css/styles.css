@@ -19,12 +19,16 @@ body {
     max-width: 2000px;
 }
 
+button:hover {
+    color: var(--txt-color-1)
+}
+
 .gridMain {
     margin-top: 20rem;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 8rem;
+    gap: 35rem;
 }
 
 /*END General*/
@@ -37,8 +41,12 @@ header {
     margin: 10px 0px;
 }
 
-#logoutButton {
+#logout {
     text-align: right;
+}
+
+#logout button:hover {
+    color: var(--txt-color-1)
 }
 
 #title {
@@ -53,6 +61,7 @@ header {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 8rem;
+    height: fit-content;
     /*grid-template-rows: 200px;*/
 }
 
@@ -96,6 +105,10 @@ header {
 
 .addEntryButton {
     outline: none;
+}
+
+.viewButton {
+    margin-right: 15rem;
 }
 
 /*END Main Layout*/
@@ -158,6 +171,19 @@ header {
 }
 
 /*END Login Form*/
+
+/*LogEntry*/
+
+.chartContainer {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    height: 300px;
+}
+
+/*END LogEntry*/
 
 @media only screen and (max-width: 900px) {
     body {

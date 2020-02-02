@@ -24,7 +24,7 @@ class Header extends Component {
             <header>
                 <span id="title" className={"color-" + Math.floor(Math.random() * 6)}>lo</span>
                 <span id="email">{this.props.userData.user.name}</span>
-                <button id="logoutButton" onClick={this.handleLogout}>Logout</button>
+                <span id="logout"><button onClick={this.handleLogout}>Logout</button></span>
             </header>
         );
     }

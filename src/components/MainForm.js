@@ -1,6 +1,7 @@
 import React from "react";
 import LoginPage from "./LoginPage"
 import Header from "./Header"
+import LogEntries from "./LogEntries"
 
 //TODO No fetch if response.ok
 
@@ -10,8 +11,9 @@ class MainForm extends React.Component {
     this.state = {
       logs: null,
       token: "",
+      log: null,
       loggedIn: false,
-      userData: null
+      userData: null,
     };
   }
 
@@ -43,7 +45,7 @@ class MainForm extends React.Component {
         }
         const logs = await response.json()
         this.setState({ logs })
-        console.log(this.state.logs)
+        //console.log(this.state.logs)
       } catch (e) {
         console.log(e)
       }
@@ -109,24 +111,46 @@ class MainForm extends React.Component {
     }
   }
 
+  viewEntryHandler = async (id) => {
+    try {
+      const response = await fetch(("https://lo-app-api.herokuapp.com/logs/" + id), {
+        method: 'GET',
+        headers: {
+          "Authorization": 'Bearer ' + this.state.token
+        },
+      })
+      if (!response.ok) {
+        throw new Error("Can not get log")
+      }
+      const log = await response.json()
+      this.setState({ log })
+      console.log(this.state.log)
+      this.getLogs()
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   logList = () => {
     if (this.state.logs) {
       const temp = this.state.logs.map(log => {
         const timeDif = Math.abs(Math.round(((new Date(log.lastEntry) - Date.now()) / 60000)))
-        const color = "color-" + Math.floor(Math.random() * 6)
-        const colorHover = color + "-hover"
+        const color = "color-" + 3//Math.floor(Math.random() * 6)
+        const colorHover = "color-4-hover"
 
         return (
           <li className="logEntry" key={log._id}>
             <div className="logEntryInfo">
               <div className="logEntryTitle">
-                <h2 className={color}>{log.name}</h2>
+                <h2 className={color}>{log.name}</h2> {/* Replace by log.color later */}
                 {log.numEntries + " "}
               </div>
 
               <span>{"since " + (new Date(log.date)).toLocaleDateString()}</span>
               <br />
+              <button className="viewButton" onClick={() => { this.viewEntryHandler(log._id) }} >View</button >
               <button className="removeButton" onClick={() => { this.removeLogHandler(log._id) }} >Remove</button >
+
             </div>
 
             <div className={"logEntryAdd " + colorHover} onClick={() => { this.addEntryHandler(log._id) }}>
@@ -159,7 +183,7 @@ class MainForm extends React.Component {
             <div className="gridMain">
               {this.state.token && this.logList()}
               <div>
-
+                <LogEntries log={this.state.log} />
               </div>
             </div>
           </div>
