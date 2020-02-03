@@ -3,6 +3,7 @@ import LoginPage from "./LoginPage"
 import Header from "./Header"
 import LogEntries from "./LogEntries"
 
+
 //TODO No fetch if response.ok
 
 class MainForm extends React.Component {
@@ -45,7 +46,6 @@ class MainForm extends React.Component {
         }
         const logs = await response.json()
         this.setState({ logs })
-        //console.log(this.state.logs)
       } catch (e) {
         console.log(e)
       }
@@ -124,8 +124,8 @@ class MainForm extends React.Component {
       }
       const log = await response.json()
       this.setState({ log })
-      console.log(this.state.log)
       this.getLogs()
+      this.scrollToBottom()
     } catch (e) {
       console.log(e)
     }
@@ -136,7 +136,7 @@ class MainForm extends React.Component {
       const temp = this.state.logs.map(log => {
         const timeDif = Math.abs(Math.round(((new Date(log.lastEntry) - Date.now()) / 60000)))
         const color = "color-" + 3//Math.floor(Math.random() * 6)
-        const colorHover = "color-4-hover"
+        const colorHover = "color-1-hover"
 
         return (
           <li className="logEntry" key={log._id}>
@@ -154,7 +154,7 @@ class MainForm extends React.Component {
             </div>
 
             <div className={"logEntryAdd " + colorHover} onClick={() => { this.addEntryHandler(log._id) }}>
-              <button className="addEntryButton" onClick={() => { this.addEntryHandler(log._id) }}>+</button>
+              <button className="addEntryButton">+</button>
               <br />
               {timeDif < 60 ? timeDif + "min" : Math.round((timeDif / 60)) + "h"}
             </div>
@@ -173,6 +173,19 @@ class MainForm extends React.Component {
     }
   }
 
+  scrollToBottom = () => {
+    this.pageEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
+  /*TODO use this for getLogs(), scroll to bottom
+   componentDidUpdate(prevProps, prevState) {
+    if (prevState.pokemons !== this.state.pokemons) {
+      console.log('pokemons state has changed.')
+    }
+  }
+  */
+
+
   render() {
     return (
       <div>
@@ -188,6 +201,9 @@ class MainForm extends React.Component {
             </div>
           </div>
         }
+        <div style={{ float: "left", clear: "both" }} //for scroll to bottom
+          ref={(el) => { this.pageEnd = el; }}>
+        </div>
       </div >
     );
   }

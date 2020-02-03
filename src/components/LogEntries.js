@@ -8,6 +8,9 @@ class LogEntries extends Component {
         this.state = {};
     }
 
+
+
+
     render() {
         if (typeof this.props.log == 'undefined') {
             return null
@@ -41,9 +44,8 @@ class LogEntries extends Component {
         })
 
         merge.reverse()
-        /////////////////////
-
         console.log(merge)
+        /////////////////////
 
 
 
@@ -61,7 +63,7 @@ class LogEntries extends Component {
 
         //new Date(entry.time).getTime() for real data
         const lastEntriesNumber = 5
-        const lastFiveEntries = this.props.log.entries.slice(0, lastEntriesNumber).map(entry => {
+        const lastFiveEntries = this.props.log.entries.slice(-lastEntriesNumber).reverse().map(entry => {
             return (
                 <li key={entry._id}>
                     <span role="img" aria-label="Emoji Pizza">🍕</span>

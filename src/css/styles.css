@@ -49,10 +49,6 @@ header {
     color: var(--txt-color-1)
 }
 
-#title {
-    text-align: left;
-}
-
 #email {
     text-align: center;
 }
@@ -119,7 +115,7 @@ header {
     margin-bottom: 15rem;
 }
 
-#loginButton {
+#loginButton, .downloadButton {
     border: 1px solid var(--main-txt-color);
     background: none;
     color: var(--main-txt-color);
@@ -127,7 +123,7 @@ header {
     cursor: pointer;
 }
 
-#loginButton:hover {
+#loginButton:hover, .downloadButton:hover {
     border: 1px solid var(--main-txt-color);
     background: var(--main-txt-color);
     color: var(--main-bg-color);
