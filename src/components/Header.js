@@ -31,8 +31,8 @@ class Header extends Component {
             if (!response.ok) {
                 throw new Error('Could not download')
             }
-            const downloadData = JSON.stringify(await response.json())
-            download(downloadData, "yourLogs.json", "application/json")
+            const downloadData = await response.text()
+            download(downloadData, "yourLogs.csv", "text/csv")
         } catch (e) {
             console.log(e)
         }
