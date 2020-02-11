@@ -42,7 +42,7 @@ class Header extends Component {
         return (
             <header>
                 <span >
-                    <button className="downloadButton" onClick={() => { this.downloadHandler() }} >Download Logs</button >
+                    <button className="downloadButton" onClick={() => { this.downloadHandler() }} >Download <span className="disableSmallScreen">Logs</span></button >
                 </span>
                 <span id="email" className={"color-" + Math.floor(Math.random() * 6)}>{this.props.userData.user.name}</span>
                 <span id="logout"><button onClick={this.logoutHandler}>Logout</button></span>

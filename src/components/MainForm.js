@@ -13,6 +13,7 @@ class MainForm extends React.Component {
       logs: null,
       token: "",
       log: null,
+      logData: null,
       loggedIn: false,
       userData: null,
     };
@@ -73,7 +74,7 @@ class MainForm extends React.Component {
     event.preventDefault();
     var logPrompt = prompt("Please enter log name", "Bananas");
     if (logPrompt == null || logPrompt === "") {
-      alert("Enter Name");
+      alert("Enter Log Name!");
     } else {
       try {
         const response = await fetch("https://lo-app-api.herokuapp.com/logs", {
@@ -113,17 +114,31 @@ class MainForm extends React.Component {
 
   viewEntryHandler = async (id) => {
     try {
-      const response = await fetch(("https://lo-app-api.herokuapp.com/logs/" + id), {
+      const response1 = await fetch(("https://lo-app-api.herokuapp.com/logs/" + id), {
         method: 'GET',
         headers: {
           "Authorization": 'Bearer ' + this.state.token
         },
       })
-      if (!response.ok) {
+      if (!response1.ok) {
         throw new Error("Can not get log")
       }
-      const log = await response.json()
+      const log = await response1.json()
       this.setState({ log })
+
+      const response2 = await fetch(("https://lo-app-api.herokuapp.com/logs/" + id + "/day/10"), {
+        method: 'GET',
+        headers: {
+          "Authorization": 'Bearer ' + this.state.token
+        },
+      })
+      if (!response2.ok) {
+        throw new Error("Can not get accumulated log")
+      }
+      const logData = await response2.json()
+      this.setState({ logData })
+
+
       this.getLogs()
       this.scrollToBottom()
     } catch (e) {
@@ -136,7 +151,7 @@ class MainForm extends React.Component {
       const temp = this.state.logs.map(log => {
         const timeDif = Math.abs(Math.round(((new Date(log.lastEntry) - Date.now()) / 60000)))
         const color = "color-" + 3//Math.floor(Math.random() * 6)
-        const colorHover = "color-1-hover"
+        //const colorHover = "color-1-hover"
 
         return (
           <li className="logEntry" key={log._id}>
@@ -153,12 +168,12 @@ class MainForm extends React.Component {
 
             </div>
 
-            <div className={"logEntryAdd " + colorHover} onClick={() => { this.addEntryHandler(log._id) }}>
-              <button className="addEntryButton">+</button>
-              <br />
-              {timeDif < 60 ? timeDif + "min" : Math.round((timeDif / 60)) + "h"}
+            <div className={"logEntryAdd "}>
+              <button className="addEntryButton" onClick={() => { this.addEntryHandler(log._id) }}>+</button>
+              <br></br>
+              <span className={"logEntryTimeDif"}>{timeDif < 60 ? timeDif + "min" : Math.round((timeDif / 60)) + "h"}</span>
             </div>
-          </li>
+          </li >
         )
       })
 
@@ -196,7 +211,7 @@ class MainForm extends React.Component {
             <div className="gridMain">
               {this.state.token && this.logList()}
               <div>
-                <LogEntries log={this.state.log} />
+                <LogEntries log={this.state.log} logData={this.state.logData} />
               </div>
             </div>
           </div>
