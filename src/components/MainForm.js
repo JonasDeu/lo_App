@@ -5,18 +5,31 @@ import LogEntries from "./LogEntries"
 
 
 //TODO No fetch if response.ok
+const url = "https://lo-app-api.herokuapp.com"
+
+const handleFirstTab = (e) => {
+  if (e.keyCode === 9) { // Tab Key
+    document.body.classList.add('user-is-tabbing');
+    window.removeEventListener('keydown', handleFirstTab);
+  }
+}
+window.addEventListener('keydown', handleFirstTab);
 
 class MainForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      logs: null,
+      loggedIn: false,
       token: "",
       log: null,
+      logs: null,
       logData: null,
-      loggedIn: false,
       userData: null,
+      viewChartSize: 10,
+      viewMode: "day",
+      viewLogID: null
     };
+
   }
 
   setLogin = (response) => {
@@ -34,10 +47,10 @@ class MainForm extends React.Component {
     this.getLogs()
   }
 
-  async getLogs() {
+  getLogs = async () => {
     if (this.state.token) {
       try {
-        const response = await fetch("https://lo-app-api.herokuapp.com/logs", {
+        const response = await fetch(url + "/logs", {
           headers: {
             "Authorization": 'Bearer ' + this.state.token
           }
@@ -55,7 +68,7 @@ class MainForm extends React.Component {
 
   addEntryHandler = async (id) => {
     try {
-      const response = await fetch(("https://lo-app-api.herokuapp.com/logs/" + id), {
+      const response = await fetch((url + "/logs/" + id), {
         method: 'POST',
         headers: {
           "Authorization": 'Bearer ' + this.state.token
@@ -77,7 +90,7 @@ class MainForm extends React.Component {
       alert("Enter Log Name!");
     } else {
       try {
-        const response = await fetch("https://lo-app-api.herokuapp.com/logs", {
+        const response = await fetch(url + "/logs", {
           method: 'POST',
           body: JSON.stringify({ name: logPrompt }),
           headers: {
@@ -96,25 +109,29 @@ class MainForm extends React.Component {
   };
 
   removeLogHandler = async (id) => {
-    try {
-      const response = await fetch(("https://lo-app-api.herokuapp.com/logs/" + id), {
-        method: 'DELETE',
-        headers: {
-          "Authorization": 'Bearer ' + this.state.token
-        },
-      })
-      if (!response.ok) {
-        throw new Error("Log can not be deleted")
+    if (window.confirm("Are you sure to delete?")) {
+      try {
+        const response = await fetch((url + "/logs/" + id), {
+          method: 'DELETE',
+          headers: {
+            "Authorization": 'Bearer ' + this.state.token
+          },
+        })
+        if (!response.ok) {
+          throw new Error("Log can not be deleted")
+        }
+        this.getLogs()
+      } catch (e) {
+        console.log(e)
       }
-      this.getLogs()
-    } catch (e) {
-      console.log(e)
     }
   }
 
-  viewEntryHandler = async (id) => {
+
+  //TODO put getViewedEntry fcuntion in props for logEntries
+  viewEntryHandler = async () => {
     try {
-      const response1 = await fetch(("https://lo-app-api.herokuapp.com/logs/" + id), {
+      const response1 = await fetch((url + "/logs/" + this.state.viewLogID), {
         method: 'GET',
         headers: {
           "Authorization": 'Bearer ' + this.state.token
@@ -126,7 +143,7 @@ class MainForm extends React.Component {
       const log = await response1.json()
       this.setState({ log })
 
-      const response2 = await fetch(("https://lo-app-api.herokuapp.com/logs/" + id + "/day/10"), {
+      const response2 = await fetch((url + "/logs/" + this.state.viewLogID + "/" + this.state.viewMode + "/" + this.state.viewChartSize), {
         method: 'GET',
         headers: {
           "Authorization": 'Bearer ' + this.state.token
@@ -137,18 +154,30 @@ class MainForm extends React.Component {
       }
       const logData = await response2.json()
       this.setState({ logData })
-
-
-      this.getLogs()
       this.scrollToBottom()
     } catch (e) {
       console.log(e)
     }
   }
 
+  viewLogChangeHandler = async (viewLogID) => {
+    await this.setState({
+      viewLogID
+    })
+    this.viewEntryHandler()
+  }
+
+  viewChangeHandler = async (mode, chartSize) => {
+    await this.setState({
+      viewChartSize: chartSize,
+      viewMode: mode
+    })
+    this.viewEntryHandler()
+  }
+
   logList = () => {
     if (this.state.logs) {
-      const temp = this.state.logs.map(log => {
+      const tempLog = this.state.logs.map(log => {
         const timeDif = Math.abs(Math.round(((new Date(log.lastEntry) - Date.now()) / 60000)))
         const color = "color-" + 3//Math.floor(Math.random() * 6)
         //const colorHover = "color-1-hover"
@@ -163,7 +192,7 @@ class MainForm extends React.Component {
 
               <span>{"since " + (new Date(log.date)).toLocaleDateString()}</span>
               <br />
-              <button className="viewButton" onClick={() => { this.viewEntryHandler(log._id) }} >View</button >
+              <button className="viewButton" onClick={() => { this.viewLogChangeHandler(log._id) }} >View</button >
               <button className="removeButton" onClick={() => { this.removeLogHandler(log._id) }} >Remove</button >
 
             </div>
@@ -179,7 +208,7 @@ class MainForm extends React.Component {
 
       return (
         <ul className="gridLogs">
-          {temp}
+          {tempLog}
           <li className="logEntry">
             <button key={"addLog"} onClick={this.addLogHandler}>+ Add new Log +</button>
           </li>
@@ -189,17 +218,11 @@ class MainForm extends React.Component {
   }
 
   scrollToBottom = () => {
-    this.pageEnd.scrollIntoView({ behavior: "smooth" });
-  }
-
-  /*TODO use this for getLogs(), scroll to bottom
-   componentDidUpdate(prevProps, prevState) {
-    if (prevState.pokemons !== this.state.pokemons) {
-      console.log('pokemons state has changed.')
+    if (window.innerWidth <= 900) {
+      this.pageEnd.scrollIntoView({ behavior: "smooth" })
     }
-  }
-  */
 
+  }
 
   render() {
     return (
@@ -211,7 +234,7 @@ class MainForm extends React.Component {
             <div className="gridMain">
               {this.state.token && this.logList()}
               <div>
-                <LogEntries log={this.state.log} logData={this.state.logData} />
+                <LogEntries log={this.state.log} logData={this.state.logData} viewChangeHandler={this.viewChangeHandler} />
               </div>
             </div>
           </div>

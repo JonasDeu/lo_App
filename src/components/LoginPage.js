@@ -100,11 +100,11 @@ class LoginPage extends Component {
                 <h1 className={"color-" + Math.floor(Math.random() * 6)}>lo</h1>
                 <hr id="loginLine" />
                 <form onSubmit={this.handleSubmit}>
-                    <div className="form-control">
+                    <div className="loginFormControl">
                         <label>Email</label>
                         <input type="text" value={this.state.email} onChange={this.handleUserChange} />
                     </div>
-                    <div className="form-control">
+                    <div className="loginFormControl">
                         <label>Password</label>
                         <input type="password" value={this.state.password} onChange={this.handlePassChange} />
                     </div>
