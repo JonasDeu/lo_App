@@ -21,13 +21,9 @@ class MainForm extends React.Component {
     this.state = {
       loggedIn: false,
       token: "",
-      log: null,
       logs: null,
-      logData: null,
       userData: null,
-      viewChartSize: 10,
-      viewMode: "day",
-      viewLogID: null
+      viewedLog: null
     };
 
   }
@@ -127,54 +123,6 @@ class MainForm extends React.Component {
     }
   }
 
-
-  //TODO put getViewedEntry fcuntion in props for logEntries
-  viewEntryHandler = async () => {
-    try {
-      const response1 = await fetch((url + "/logs/" + this.state.viewLogID), {
-        method: 'GET',
-        headers: {
-          "Authorization": 'Bearer ' + this.state.token
-        },
-      })
-      if (!response1.ok) {
-        throw new Error("Can not get log")
-      }
-      const log = await response1.json()
-      this.setState({ log })
-
-      const response2 = await fetch((url + "/logs/" + this.state.viewLogID + "/" + this.state.viewMode + "/" + this.state.viewChartSize), {
-        method: 'GET',
-        headers: {
-          "Authorization": 'Bearer ' + this.state.token
-        },
-      })
-      if (!response2.ok) {
-        throw new Error("Can not get accumulated log")
-      }
-      const logData = await response2.json()
-      this.setState({ logData })
-      this.scrollToBottom()
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  viewLogChangeHandler = async (viewLogID) => {
-    await this.setState({
-      viewLogID
-    })
-    this.viewEntryHandler()
-  }
-
-  viewChangeHandler = async (mode, chartSize) => {
-    await this.setState({
-      viewChartSize: chartSize,
-      viewMode: mode
-    })
-    this.viewEntryHandler()
-  }
-
   logList = () => {
     if (this.state.logs) {
       const tempLog = this.state.logs.map(log => {
@@ -192,7 +140,7 @@ class MainForm extends React.Component {
 
               <span>{"since " + (new Date(log.date)).toLocaleDateString()}</span>
               <br />
-              <button className="viewButton" onClick={() => { this.viewLogChangeHandler(log._id) }} >View</button >
+              <button className="viewButton" onClick={() => { this.viewedLogChangeHandler(log._id) }} >View</button >
               <button className="removeButton" onClick={() => { this.removeLogHandler(log._id) }} >Remove</button >
 
             </div>
@@ -217,11 +165,13 @@ class MainForm extends React.Component {
     }
   }
 
-  scrollToBottom = () => {
-    if (window.innerWidth <= 900) {
-      this.pageEnd.scrollIntoView({ behavior: "smooth" })
-    }
+  viewedLogChangeHandler = (viewedLog) => {
+    this.setState({ viewedLog })
+    if (window.innerWidth <= 900) { this.scrollToBottom() }
+  }
 
+  scrollToBottom = () => {
+    this.pageEnd.scrollIntoView({ behavior: "smooth" })
   }
 
   render() {
@@ -234,7 +184,7 @@ class MainForm extends React.Component {
             <div className="gridMain">
               {this.state.token && this.logList()}
               <div>
-                <LogEntries log={this.state.log} logData={this.state.logData} viewChangeHandler={this.viewChangeHandler} />
+                <LogEntries viewedLog={this.state.viewedLog} url={url} token={this.state.token} />
               </div>
             </div>
           </div>
