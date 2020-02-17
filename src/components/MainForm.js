@@ -5,6 +5,7 @@ import LogEntries from "./LogEntries"
 
 
 //TODO No fetch if response.ok
+//getlogs in componentDidUpdatea
 const url = "https://lo-app-api.herokuapp.com"
 
 const handleFirstTab = (e) => {
@@ -28,6 +29,12 @@ class MainForm extends React.Component {
 
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.userData !== this.state.userData) {
+      this.getLogs()
+    }
+  }
+
   setLogin = (response) => {
     if (!response) {
       this.setState({
@@ -40,7 +47,6 @@ class MainForm extends React.Component {
       token: response.token,
       userData: response
     })
-    this.getLogs()
   }
 
   getLogs = async () => {
@@ -70,9 +76,7 @@ class MainForm extends React.Component {
           "Authorization": 'Bearer ' + this.state.token
         },
       })
-      if (!response.ok) {
-        throw new Error("Log can not deleted")
-      }
+      if (!response.ok) { throw new Error("Log can not deleted") }
       this.getLogs()
     } catch (e) {
       console.log(e)
@@ -94,9 +98,7 @@ class MainForm extends React.Component {
             "Authorization": 'Bearer ' + this.state.token
           },
         })
-        if (!response.ok) {
-          throw new Error('Log can not be created')
-        }
+        if (!response.ok) { throw new Error('Log can not be created') }
         this.getLogs()
       } catch (e) {
         console.log(e)
@@ -113,9 +115,7 @@ class MainForm extends React.Component {
             "Authorization": 'Bearer ' + this.state.token
           },
         })
-        if (!response.ok) {
-          throw new Error("Log can not be deleted")
-        }
+        if (!response.ok) { throw new Error("Log can not be deleted") }
         this.getLogs()
       } catch (e) {
         console.log(e)
@@ -140,7 +140,7 @@ class MainForm extends React.Component {
 
               <span>{"since " + (new Date(log.date)).toLocaleDateString()}</span>
               <br />
-              <button className="viewButton" onClick={() => { this.viewedLogChangeHandler(log._id) }} >View</button >
+              {/*<button className="viewButton" onClick={() => { this.viewedLogChangeHandler(log._id) }} >View</button >*/}
               <button className="removeButton" onClick={() => { this.removeLogHandler(log._id) }} >Remove</button >
 
             </div>
@@ -184,7 +184,7 @@ class MainForm extends React.Component {
             <div className="gridMain">
               {this.state.token && this.logList()}
               <div>
-                <LogEntries viewedLog={this.state.viewedLog} url={url} token={this.state.token} />
+                <LogEntries viewedLog={this.state.viewedLog} logs={this.state.logs} url={url} token={this.state.token} />
               </div>
             </div>
           </div>

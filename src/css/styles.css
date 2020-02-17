@@ -23,8 +23,12 @@ body:not(.user-is-tabbing) button:focus, body:not(.user-is-tabbing) input:focus,
     outline: none;
 }
 
+button, select, input {
+    color: var(--main-txt-color);
+}
+
 button:hover {
-    color: var(--txt-color-1)
+    color: var(--txt-color-1);
 }
 
 .gridMain {
@@ -190,8 +194,16 @@ header {
 }
 
 .recharts-tooltip-wrapper {
-    color: var(--main-bg-color);
+    color: var(--main-txt-color);
     font-size: 14rem;
+}
+
+.recharts-default-tooltip {
+    background-color: rgba(11, 12, 16, 0.6) !important;
+}
+
+.recharts-legend-wrapper {
+    font-size: 15rem;
 }
 
 .viewEntryForm {
@@ -199,28 +211,15 @@ header {
 }
 
 .viewEntryFormControl {
+    border: 0;
+    border-radius: 2px;
+    height: 30rem;
+    text-align: center;
+    padding: 4rem 10rem 4rem 10rem;
+    font-size: 14rem;
     margin-right: 5rem;
-    display: inline;
-}
-
-.viewEntryFormControl input {
-    border: 0;
-    border-radius: 2px;
-    width: 60rem;
-    height: 30rem;
-    text-align: center;
-    padding: 4px;
-    font-size: 14rem;
-}
-
-.viewEntryFormControl select {
-    height: 30rem;
-    border: 0;
-    border-radius: 2px;
-    width: 100rem;
-    text-align: center;
-    padding: 4px;
-    font-size: 14rem;
+    background-color: var(--main-txt-color);
+    color: var(--main-bg-color);
 }
 
 .viewEntryFormControl label {
