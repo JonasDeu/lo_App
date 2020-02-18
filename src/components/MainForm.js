@@ -2,7 +2,7 @@ import React from "react";
 import LoginPage from "./LoginPage"
 import Header from "./Header"
 import LogEntries from "./LogEntries"
-
+import Heatmap from "./Heatmap"
 
 //TODO No fetch if response.ok
 //getlogs in componentDidUpdatea
@@ -185,6 +185,7 @@ class MainForm extends React.Component {
               {this.state.token && this.logList()}
               <div>
                 <LogEntries viewedLog={this.state.viewedLog} logs={this.state.logs} url={url} token={this.state.token} />
+                <Heatmap url={url} token={this.state.token} />
               </div>
             </div>
           </div>

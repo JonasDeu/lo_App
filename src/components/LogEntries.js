@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Legend } from 'recharts'
 
 const colors = [
     "#FDFDFD",
@@ -16,7 +16,7 @@ class LogEntries extends Component {
         super(props);
         this.state = {
             mode: "day",
-            chartSize: 10,
+            chartSize: 20,
             log: null,
             logData: null,
             combLogData: null,
@@ -92,16 +92,13 @@ class LogEntries extends Component {
         event.preventDefault()
     }
 
-    chartChangeHandler = (mode, chartSize) => {
-        this.setState({ chartSize, mode })
-    }
 
     handleModeChange = (event) => {
-        this.chartChangeHandler(event.target.value, this.state.chartSize)
+        this.setState({ mode: event.target.value })
     };
 
     handleChartSizeChange = (event) => {
-        this.chartChangeHandler(this.state.mode, event.target.value)
+        this.setState({ chartSize: event.target.value })
     }
 
     lastFiveEntries = () => {
@@ -149,10 +146,9 @@ class LogEntries extends Component {
 
         const chartLines = []
         lines.forEach((line, index) => {
-            chartLines.push(< Line type="monotone" dataKey={line} stroke={colors[index % 7]} isAnimationActive={true} />)
+            chartLines.push(< Line type="monotone" dataKey={line} stroke={colors[index % 7]} isAnimationActive={true} key={index} />)
         })
 
-        console.log(this.state.combLogData)
         return (
             < ResponsiveContainer >
                 <LineChart data={this.state.combLogData} margin={{ top: 5, right: 15, bottom: 10 }}>
@@ -181,7 +177,6 @@ class LogEntries extends Component {
                         </select>
                     </form>
                 </div>
-
                 {/*
                 <h2>{this.state.log ? this.state.log.name : "Log Chart"} </h2>
                 <div className="chartContainer">
