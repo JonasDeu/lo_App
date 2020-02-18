@@ -155,12 +155,12 @@ class MainForm extends React.Component {
       })
 
       return (
-        <ul className="gridLogs">
+        <React.Fragment>
           {tempLog}
           <li className="logEntry">
             <button key={"addLog"} onClick={this.addLogHandler}>+ Add new Log +</button>
           </li>
-        </ul>
+        </React.Fragment>
       );
     }
   }
@@ -181,13 +181,14 @@ class MainForm extends React.Component {
         {this.state.token &&
           <div>
             <hr />
-            <div className="gridMain">
+            <div className="gridLogs">
               {this.state.token && this.logList()}
-              <div>
-                <LogEntries viewedLog={this.state.viewedLog} logs={this.state.logs} url={url} token={this.state.token} />
-                <Heatmap url={url} token={this.state.token} />
-              </div>
             </div>
+            <div className="gridStats">
+              <LogEntries viewedLog={this.state.viewedLog} logs={this.state.logs} url={url} token={this.state.token} />
+              <Heatmap url={url} token={this.state.token} />
+            </div>
+
           </div>
         }
         <div style={{ float: "left", clear: "both" }} //for scroll to bottom

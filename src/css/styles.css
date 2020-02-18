@@ -15,8 +15,12 @@
 body {
     background-color: var(--main-bg-color);
     color: var(--main-txt-color);
-    margin: 0px 50px;
-    max-width: 2000px;
+    margin: 0px auto 0 auto;
+    max-width: 2000rem;
+}
+
+#root {
+    margin: 0 80rem;
 }
 
 body:not(.user-is-tabbing) button:focus, body:not(.user-is-tabbing) input:focus, body:not(.user-is-tabbing) select:focus, body:not(.user-is-tabbing) textarea:focus {
@@ -31,7 +35,7 @@ button:hover {
     color: var(--txt-color-1);
 }
 
-.gridMain {
+.gridStats {
     margin-top: 20rem;
     width: 100%;
     display: grid;
@@ -66,6 +70,7 @@ header {
 }
 
 .gridLogs {
+    margin-top: 20rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 8rem;
@@ -259,7 +264,7 @@ header {
 }
 
 .heatMap th {
-    font-size: 16rem;
+    font-size: 14rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -267,9 +272,10 @@ header {
     height: 30rem;
     text-align: left;
     font-weight: normal;
+    padding: 15rem 15rem 15rem 5rem;
 }
 
-.heatMap th, td {
+.heatMap td {
     padding: 15rem;
 }
 
@@ -289,10 +295,10 @@ header {
 /*END Heatmap*/
 
 @media only screen and (max-width: 900px) {
-    body {
-        margin: 0px 20px;
+    #root {
+        margin: 0 20rem;
     }
-    .gridMain {
+    .gridStats {
         grid-template-columns: repeat(1, 1fr);
     }
     .disableSmallScreen {
