@@ -72,21 +72,21 @@ class Heatmap extends Component {
             return null
         }
 
-        const heading = this.state.heatData.labels.map((label) => {
+        const heading = this.state.heatData.labels.map((label, labelIndex) => {
             return (
-                <th>{label}</th>
+                <th key={labelIndex}>{label}</th>
             )
         })
 
         const body = this.state.heatData.labels.map((label, labelIndex) => {
-            const values = this.state.heatData.correlations[labelIndex].map((value) => {
+            const values = this.state.heatData.correlations[labelIndex].map((value, valueIndex) => {
                 var style = {
                     backgroundColor: "#" + getGradientColor(value)
                 }
-                return <td style={style}> {parseFloat(value).toFixed(2)}</td >
+                return <td style={style} key={valueIndex}> {parseFloat(value).toFixed(2)}</td >
             })
             return (
-                <tr>
+                <tr key={labelIndex}>
                     <th>{label}</th>
                     {values}
                 </tr>

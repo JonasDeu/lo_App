@@ -40,7 +40,7 @@ button:hover {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 35rem;
+    gap: 8rem;
 }
 
 /*END General*/
@@ -80,8 +80,12 @@ header {
 }
 
 .logEntry {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid var(--txt-color-3);
     background-color: var(--main-fg-color);
-    padding: 10px 20px;
+    padding: 8px 18px;
     border-radius: 3px;
     width: 100%;
     display: table;
@@ -151,7 +155,7 @@ header {
 }
 
 .loginFormControl {
-    margin-bottom: 10px;
+    margin-bottom: 10rem;
     position: relative;
 }
 
@@ -162,6 +166,7 @@ header {
     width: 200rem;
     padding: 7px;
     font-size: 14rem;
+    color: var(--main-bg-color);
 }
 
 .form-checkbox {
@@ -186,12 +191,15 @@ header {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    width: 100%;
-    height: 400rem;
-    padding: 20rem 0 50rem 0;
+    border: 1px solid var(--txt-color-1);
     margin-bottom: 15rem;
     background-color: var(--main-fg-color);
     border-radius: 3px;
+    padding: 10rem 5rem 30rem 20rem;
+}
+
+.lineChart {
+    height: 400rem;
 }
 
 .recharts-wrapper {
@@ -213,7 +221,6 @@ header {
 }
 
 .viewEntryForm {
-    margin-left: 20rem;
     padding-top: 5rem;
 }
 
@@ -222,7 +229,7 @@ header {
     border-radius: 2px;
     height: 30rem;
     text-align: center;
-    padding: 4rem 10rem 4rem 10rem;
+    padding: 4rem 15rem 4rem 15rem;
     font-size: 14rem;
     margin-right: 5rem;
     background-color: var(--main-txt-color);
@@ -234,7 +241,7 @@ header {
 }
 
 .lastEntries {
-    padding: 10px 20px;
+    padding: 10rem 20rem;
     background-color: var(--main-fg-color);
     border-radius: 3px;
 }
@@ -248,11 +255,11 @@ header {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
-    height: 400rem;
-    padding: 10rem 20rem 60rem 20rem;
+    padding: 10rem 20rem 30rem 20rem;
     margin-bottom: 15rem;
     background-color: var(--main-fg-color);
     border-radius: 3px;
+    border: 1px solid var(--txt-color-1);
 }
 
 .heatMap {
@@ -268,19 +275,19 @@ header {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    min-width: 400rem;
     height: 30rem;
     text-align: left;
     font-weight: normal;
-    padding: 15rem 15rem 15rem 5rem;
+    padding: 15rem 1rem 15rem 5rem;
+}
+
+.heatMap th:first-child {
+    width: 120rem;
 }
 
 .heatMap td {
-    padding: 15rem;
-}
-
-.heatMap tr {
-    border-bottom: 1px solid var(--main-txt-color);
+    padding: 5rem;
+    overflow: hidden;
 }
 
 .heatMap td:hover {
@@ -288,20 +295,30 @@ header {
     color: var(--main-bg-color);
 }
 
+.heatMap tr {
+    border-bottom: 1px solid var(--main-txt-color);
+}
+
 .heatMapForm {
-    margin-top: 25rem;
+    padding-top: 25rem;
 }
 
 /*END Heatmap*/
 
 @media only screen and (max-width: 900px) {
     #root {
-        margin: 0 20rem;
+        margin: 0 8rem;
     }
     .gridStats {
         grid-template-columns: repeat(1, 1fr);
     }
     .disableSmallScreen {
         display: none;
+    }
+    .heatMapContainer {
+        padding: 10rem 10rem 60rem 10rem;
+    }
+    .chartContainer {
+        padding: 20rem 0 50rem 10rem;
     }
 }

@@ -168,7 +168,9 @@ class LogEntries extends Component {
         return (
             <div>
                 <div className="chartContainer">
-                    {this.renderCombLineChart()}
+                    <div className="lineChart">
+                        {this.renderCombLineChart()}
+                    </div>
                     <form className="viewEntryForm" onSubmit={this.handleSubmit}>
                         <input className="viewEntryFormControl" name="Chart Size" type="number" min="1" max="500" value={this.state.chartSize} onChange={this.handleChartSizeChange} />
                         <select className="viewEntryFormControl" name="Mode" value={this.state.mode} onChange={this.handleModeChange}>
