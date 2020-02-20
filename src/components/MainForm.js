@@ -4,8 +4,10 @@ import Header from "./Header"
 import LogEntries from "./LogEntries"
 import Heatmap from "./Heatmap"
 
-//TODO No fetch if response.ok
-//getlogs in componentDidUpdatea
+//TODO 
+//No fetch if response.ok
+//ask for keepLoggedIn
+
 const url = "https://lo-app-api.herokuapp.com"
 
 const handleFirstTab = (e) => {
@@ -29,6 +31,14 @@ class MainForm extends React.Component {
 
   }
 
+  componentDidMount() {
+    const loginData = window.localStorage.getItem('loginData')
+    console.log(loginData)
+    if (loginData) {
+      this.setLogin(JSON.parse(loginData))
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.userData !== this.state.userData) {
       this.getLogs()
@@ -37,12 +47,14 @@ class MainForm extends React.Component {
 
   setLogin = (response) => {
     if (!response) {
+      window.localStorage.removeItem('loginData');
       this.setState({
         token: null,
         userData: null
       })
       return
     }
+    window.localStorage.setItem('loginData', JSON.stringify(response));
     this.setState({
       token: response.token,
       userData: response
@@ -141,7 +153,7 @@ class MainForm extends React.Component {
               <span>{"since " + (new Date(log.date)).toLocaleDateString()}</span>
               <br />
               {/*<button className="viewButton" onClick={() => { this.viewedLogChangeHandler(log._id) }} >View</button >*/}
-              <button className="removeButton" onClick={() => { this.removeLogHandler(log._id) }} >Remove</button >
+              <button className="removeButton" onClick={() => { this.removeLogHandler(log._id) }} >X</button >
 
             </div>
 
