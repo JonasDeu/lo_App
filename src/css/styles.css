@@ -45,6 +45,66 @@ button:hover {
 
 /*END General*/
 
+/*Login Form*/
+
+#loginLine {
+    margin-bottom: 25rem;
+}
+
+#loginButton, .downloadButton, #createButton {
+    border: 1px solid var(--main-txt-color);
+    background: none;
+    color: var(--main-txt-color);
+    padding: 2rem 10rem;
+    cursor: pointer;
+    margin-right: 10rem
+}
+
+#loginButton:hover, .downloadButton:hover, #createButton:hover, #loginButton:focus, .downloadButton:focus, #createButton:focus {
+    background: var(--main-txt-color);
+    color: var(--main-bg-color);
+    padding: 2rem 10rem;
+}
+
+.loginForm {
+    margin: 50rem auto;
+}
+
+.loginFormControl {
+    margin-bottom: 10rem;
+    position: relative;
+}
+
+.loginFormControl input {
+    border: 0;
+    border-radius: 2px;
+    display: block;
+    width: 200rem;
+    padding: 7px;
+    font-size: 14rem;
+    color: var(--main-bg-color);
+}
+
+.form-checkbox {
+    margin-bottom: 30rem;
+    background: none;
+}
+
+.form-checkbox label {
+    margin-left: 8rem;
+    font-size: 14rem;
+}
+
+.createAccountHr {
+    margin-bottom: 20rem;
+}
+
+#errorButton {
+    margin-right: 5rem;
+}
+
+/*END Login Form*/
+
 /*Main Layout*/
 
 header {
@@ -116,6 +176,38 @@ header {
     cursor: pointer;
 }
 
+.logEntryAdd button:hover {
+    animation-name: addRotate;
+    animation-duration: 0.3s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes addRotate {
+    50% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(5deg);
+    }
+}
+
+.addedEntryAnimation {
+    animation-name: addedEntryAnimation;
+    animation-duration: 0.3s;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+}
+
+@keyframes addedEntryAnimation {
+    0% {
+        filter: blur(2px) brightness(200%) hue-rotate(270deg);
+        /*transform: rotate(5000deg) scale(3.4) skew(50deg);*/
+    }
+}
+
 .logEntryTitle {
     margin-bottom: 3rem;
     white-space: nowrap;
@@ -129,63 +221,7 @@ header {
 
 /*END Main Layout*/
 
-/*Login Form*/
-
-#loginLine {
-    margin-bottom: 15rem;
-}
-
-#loginButton, .downloadButton {
-    border: 1px solid var(--main-txt-color);
-    background: none;
-    color: var(--main-txt-color);
-    padding: 2rem 10rem;
-    cursor: pointer;
-}
-
-#loginButton:hover, .downloadButton:hover, #loginButton:focus, .downloadButton:focus {
-    border: 1px solid var(--main-txt-color);
-    background: var(--main-txt-color);
-    color: var(--main-bg-color);
-    padding: 2rem 10rem;
-}
-
-.loginForm {
-    margin: 50rem auto;
-}
-
-.loginFormControl {
-    margin-bottom: 10rem;
-    position: relative;
-}
-
-.loginFormControl input {
-    border: 0;
-    border-radius: 2px;
-    display: block;
-    width: 200rem;
-    padding: 7px;
-    font-size: 14rem;
-    color: var(--main-bg-color);
-}
-
-.form-checkbox {
-    margin-bottom: 10px;
-    background: none;
-}
-
-.form-checkbox label {
-    margin-left: 8px;
-    margin-bottom: 50px;
-}
-
-#errorButton {
-    margin-right: 5rem;
-}
-
-/*END Login Form*/
-
-/*LogEntry*/
+/*LineChart*/
 
 .chartContainer {
     -webkit-box-sizing: border-box;
@@ -246,7 +282,7 @@ header {
     border-radius: 3px;
 }
 
-/*END LogEntry*/
+/*END LineChart*/
 
 /*Heatmap*/
 

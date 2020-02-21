@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import download from "downloadjs"
+
+let headerColor = 0
 
 class Header extends Component {
 
@@ -39,12 +41,13 @@ class Header extends Component {
     }
 
     render() {
+
         return (
             <header>
                 <span >
                     <button className="downloadButton" onClick={() => { this.downloadHandler() }} >Download <span className="disableSmallScreen">Logs</span></button >
                 </span>
-                <span id="email" className={"color-" + Math.floor(Math.random() * 6)}>{this.props.userData.user.name}</span>
+                <span id="email" className={"color-" + (headerColor++) % 6}>{this.props.userData.user.name}</span>
                 <span id="logout"><button onClick={this.logoutHandler}>Logout</button></span>
             </header>
         );

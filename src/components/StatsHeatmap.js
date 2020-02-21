@@ -1,23 +1,22 @@
 import React, { Component } from "react"
 
 const getGradientColor = (value) => {
-    var color1 = '18E3C8'
-    var color2 = '282A36'
-
-    var ratio = Math.abs(value)
-    var hex = function (x) {
+    const color1 = '18E3C8'
+    const color2 = '282A36'
+    const ratio = Math.abs(value)
+    const hex = function (x) {
         x = x.toString(16)
         return (x.length === 1) ? '0' + x : x
     };
 
-    var r = Math.ceil(parseInt(color1.substring(0, 2), 16) * ratio + parseInt(color2.substring(0, 2), 16) * (1 - ratio));
-    var g = Math.ceil(parseInt(color1.substring(2, 4), 16) * ratio + parseInt(color2.substring(2, 4), 16) * (1 - ratio));
-    var b = Math.ceil(parseInt(color1.substring(4, 6), 16) * ratio + parseInt(color2.substring(4, 6), 16) * (1 - ratio));
+    const r = Math.ceil(parseInt(color1.substring(0, 2), 16) * ratio + parseInt(color2.substring(0, 2), 16) * (1 - ratio));
+    const g = Math.ceil(parseInt(color1.substring(2, 4), 16) * ratio + parseInt(color2.substring(2, 4), 16) * (1 - ratio));
+    const b = Math.ceil(parseInt(color1.substring(4, 6), 16) * ratio + parseInt(color2.substring(4, 6), 16) * (1 - ratio));
 
     return hex(r) + hex(g) + hex(b);
 }
 
-class Heatmap extends Component {
+class StatsHeatmap extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,11 +27,11 @@ class Heatmap extends Component {
     }
 
     async componentDidMount() {
-        this.setState({ heatData: await this.fetchHeatData() })
+        //this.setState({ heatData: await this.fetchHeatData() })
     }
 
     async componentDidUpdate(prevProps, prevState) {
-        if (prevState.mode !== this.state.mode | prevState.dataTime !== this.state.dataTime) {
+        if (prevState.mode !== this.state.mode | prevState.dataTime !== this.state.dataTime | prevProps.change !== this.props.change) {
             this.setState({ heatData: await this.fetchHeatData() })
 
         }
@@ -80,8 +79,13 @@ class Heatmap extends Component {
 
         const body = this.state.heatData.labels.map((label, labelIndex) => {
             const values = this.state.heatData.correlations[labelIndex].map((value, valueIndex) => {
+                let colorValue = Math.abs(value)
+                colorValue < 0.9 ? colorValue = 0 : colorValue = (colorValue - 0.9) * 10
                 var style = {
-                    backgroundColor: "#" + getGradientColor(value)
+                    backgroundColor: "#" + getGradientColor(colorValue)
+                }
+                if (labelIndex === valueIndex) {
+                    return <td key={valueIndex}>-</td >
                 }
                 return <td style={style} key={valueIndex}> {parseFloat(value).toFixed(2)}</td >
             })
@@ -126,4 +130,4 @@ class Heatmap extends Component {
     }
 }
 
-export default Heatmap;
+export default StatsHeatmap;

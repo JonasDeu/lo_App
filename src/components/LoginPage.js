@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
+let logoColor = 0
+
 class LoginPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
             password: '',
-            checkedCreation: false,
+            keepLogged: false,
             error: '',
         };
     }
@@ -28,7 +30,7 @@ class LoginPage extends Component {
                 this.setState({ error: 'Credentials not found' })
                 throw new Error('Credentials not found')
             }
-            this.props.setLogin(await response.json())
+            this.props.setLogin(await response.json(), this.state.keepLogged)
 
         } catch (e) {
             console.log(e)
@@ -55,7 +57,7 @@ class LoginPage extends Component {
                 throw new Error('Could not create')
             }
 
-            this.props.setLogin(await response.json())
+            this.props.setLogin(await response.json(), this.state.keepLogged)
 
         } catch (e) {
             console.log(e)
@@ -66,9 +68,7 @@ class LoginPage extends Component {
         event.preventDefault()
         if (!this.state.email) { return this.setState({ error: 'Email required' }) }
         if (!this.state.password) { return this.setState({ error: 'Password required' }) }
-
-        this.state.checkedCreation ? this.createUser() : this.loginUser()
-
+        this.loginUser()
         return this.setState({ error: '' })
     }
 
@@ -84,9 +84,16 @@ class LoginPage extends Component {
         });
     }
 
-    handleCreationChange = (event) => {
+    handleCreation = (event) => {
+        if (!this.state.email) { return this.setState({ error: 'Email required' }) }
+        if (!this.state.password) { return this.setState({ error: 'Password required' }) }
+        this.createUser()
+        return this.setState({ error: '' })
+    }
+
+    handleKeepLoggedChange = (event) => {
         this.setState({
-            checkedCreation: !this.state.checkedCreation,
+            keepLogged: !this.state.keepLogged,
         });
     }
 
@@ -97,7 +104,7 @@ class LoginPage extends Component {
     render() {
         return (
             <div className="loginForm">
-                <h1 className={"color-" + Math.floor(Math.random() * 6)}>lo</h1>
+                <h1 className={"color-" + (logoColor++) % 6}>lo</h1>
                 <hr id="loginLine" />
                 <form onSubmit={this.handleSubmit}>
                     <div className="loginFormControl">
@@ -109,11 +116,13 @@ class LoginPage extends Component {
                         <input type="password" value={this.state.password} onChange={this.handlePassChange} />
                     </div>
                     <div className="form-checkbox">
-                        <input type="checkbox" checked={this.state.checkedCreation} onChange={this.handleCreationChange} />
-                        <label>Create Account?</label>
+                        <input type="checkbox" checked={this.state.keepLogged} onChange={this.handleKeepLoggedChange} />
+                        <label>Keep logged in?</label>
                     </div>
 
                     <input id="loginButton" type="submit" value="Enter" />
+                    <input id="createButton" type="button" value="Create Account" onClick={this.handleCreation} />
+
 
                     {
                         this.state.error &&

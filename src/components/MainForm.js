@@ -1,12 +1,12 @@
 import React from "react";
 import LoginPage from "./LoginPage"
 import Header from "./Header"
-import LogEntries from "./LogEntries"
-import Heatmap from "./Heatmap"
+import StatsLineChart from "./StatsLineChart"
+import StatsHeatmap from "./StatsHeatmap"
 
 //TODO 
 //No fetch if response.ok
-//ask for keepLoggedIn
+//avoud duplicate logs
 
 const url = "https://lo-app-api.herokuapp.com"
 
@@ -45,16 +45,16 @@ class MainForm extends React.Component {
     }
   }
 
-  setLogin = (response) => {
+  setLogin = (response, keepLogged) => {
     if (!response) {
-      window.localStorage.removeItem('loginData');
+      window.localStorage.removeItem('loginData')
       this.setState({
         token: null,
         userData: null
       })
       return
     }
-    window.localStorage.setItem('loginData', JSON.stringify(response));
+    if (keepLogged) { window.localStorage.setItem('loginData', JSON.stringify(response)) }
     this.setState({
       token: response.token,
       userData: response
@@ -80,7 +80,14 @@ class MainForm extends React.Component {
     }
   }
 
+
+
   addEntryHandler = async (id) => {
+    const entry = document.getElementById(id);
+    entry.classList.remove("addedEntryAnimation");
+    void entry.offsetWidth;
+    entry.classList.add("addedEntryAnimation");
+
     try {
       const response = await fetch((url + "/logs/" + id), {
         method: 'POST',
@@ -89,6 +96,8 @@ class MainForm extends React.Component {
         },
       })
       if (!response.ok) { throw new Error("Log can not deleted") }
+
+
       this.getLogs()
     } catch (e) {
       console.log(e)
@@ -143,7 +152,7 @@ class MainForm extends React.Component {
         //const colorHover = "color-1-hover"
 
         return (
-          <li className="logEntry" key={log._id}>
+          <li className="logEntry" key={log._id} id={log._id}>
             <div className="logEntryInfo">
               <div className="logEntryTitle">
                 <h2 className={color}>{log.name}</h2> {/* Replace by log.color later */}
@@ -197,8 +206,8 @@ class MainForm extends React.Component {
               {this.state.token && this.logList()}
             </div>
             <div className="gridStats">
-              <LogEntries viewedLog={this.state.viewedLog} logs={this.state.logs} url={url} token={this.state.token} />
-              <Heatmap url={url} token={this.state.token} />
+              <StatsLineChart change={this.state.logs} viewedLog={this.state.viewedLog} logs={this.state.logs} url={url} token={this.state.token} />
+              <StatsHeatmap change={this.state.logs} url={url} token={this.state.token} />
             </div>
 
           </div>

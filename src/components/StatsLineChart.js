@@ -11,7 +11,7 @@ const colors = [
     "#3FDCEE"
 ]
 
-class LogEntries extends Component {
+class StatsLineChart extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,16 +20,16 @@ class LogEntries extends Component {
             log: null,
             logData: null,
             combLogData: null,
-            lastEntriesNumber: 5
+            lastEntriesNumber: 5,
         };
     }
 
     async componentDidMount() {
-        this.setState({ combLogData: await this.fetchCombLogChartData() })
+        //this.setState({ combLogData: await this.fetchCombLogChartData() })
     }
 
     async componentDidUpdate(prevProps, prevState) {
-        if (prevProps.viewedLog !== this.props.viewedLog | prevState.mode !== this.state.mode | prevState.chartSize !== this.state.chartSize) {
+        if (prevProps.viewedLog !== this.props.viewedLog | prevState.mode !== this.state.mode | prevState.chartSize !== this.state.chartSize | prevProps.change !== this.props.change) {
             this.setState({ logData: await this.fetchLogChartData(this.props.viewedLog) })
             this.setState({ combLogData: await this.fetchCombLogChartData(this.props.viewedLog) })
             this.setState({ log: await this.fetchLog(this.props.viewedLog) })
@@ -198,4 +198,4 @@ class LogEntries extends Component {
     }
 }
 
-export default LogEntries;
+export default StatsLineChart;
