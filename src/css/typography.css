@@ -10,17 +10,24 @@ body {
    color: var(--main-txt-color);
 }
 
+h1 {
+   font-size: 150rem;
+   margin-bottom: 40rem;
+   margin-top: 50rem;
+}
+
 h2 {
+   font-size: 24rem;
+   display: inline;
+   color: var(--main-txt-color)
+}
+
+h3 {
    font-size: 26rem;
    display: inline;
    margin-right: 5rem;
    text-transform: lowercase;
    color: var(--txt-color-3)
-}
-
-h1 {
-   font-size: 120rem;
-   margin-bottom: 40rem;
 }
 
 .errorMessage {

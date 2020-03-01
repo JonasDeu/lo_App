@@ -43,6 +43,31 @@ button:hover {
     gap: 8rem;
 }
 
+.gridLogin {
+    margin-top: 20rem;
+    display: grid;
+    grid-template-columns: 350rem auto;
+    gap: 20rem;
+}
+
+.loginForm, .loginExample {
+    background-color: var(--main-fg-color);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid var(--txt-color-1);
+    margin-bottom: 15rem;
+    border-radius: 3px;
+    padding: 25rem 30rem 30rem 30rem;
+}
+
+.exampleContainer {
+    padding: 40rem;
+    margin: 20rem 0 20rem 0;
+    background-color: var(--main-bg-color);
+    border-radius: 3px;
+}
+
 /*END General*/
 
 /*Login Form*/
@@ -64,10 +89,6 @@ button:hover {
     background: var(--main-txt-color);
     color: var(--main-bg-color);
     padding: 2rem 10rem;
-}
-
-.loginForm {
-    margin: 50rem auto;
 }
 
 .loginFormControl {
@@ -129,14 +150,17 @@ header {
     text-overflow: ellipsis;
 }
 
-.gridLogs {
-    margin-top: 20rem;
+.gridLogs, .exampleGridLogs {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 8rem;
     height: fit-content;
     /*grid-template-rows: 200px;*/
     grid-template-rows: min-content;
+}
+
+.gridLogs {
+    margin-top: 20rem;
 }
 
 .logEntry {
@@ -177,6 +201,7 @@ header {
 }
 
 .logEntryAdd button:hover {
+    color: var(--main-txt-color);
     animation-name: addRotate;
     animation-duration: 0.3s;
     animation-direction: alternate;
@@ -185,26 +210,48 @@ header {
 }
 
 @keyframes addRotate {
+    0% {
+        color: var(--txt-color-1);
+    }
     50% {
         transform: rotate(-5deg);
     }
     100% {
         transform: rotate(5deg);
+        color: var(--txt-color-1);
     }
 }
 
-.addedEntryAnimation {
-    animation-name: addedEntryAnimation;
+.addEntryAnimation {
+    animation-name: addEntryAnimation;
     animation-duration: 0.3s;
     animation-direction: alternate;
     animation-iteration-count: 1;
     animation-timing-function: ease-out;
 }
 
-@keyframes addedEntryAnimation {
+@keyframes addEntryAnimation {
     0% {
         filter: blur(2px) brightness(200%) hue-rotate(270deg);
         /*transform: rotate(5000deg) scale(3.4) skew(50deg);*/
+    }
+}
+
+.addLoadingAnimation .logEntryAdd button {
+    animation-name: addLoadingAnimation;
+    animation-duration: 0.3s;
+    animation-direction: alternate;
+    animation-iteration-count: 5;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes addLoadingAnimation {
+    0% {
+        color: var(--txt-color-1);
+    }
+    100% {
+        color: var(--txt-color-1);
+        transform: rotate(160deg);
     }
 }
 
@@ -341,11 +388,81 @@ header {
 
 /*END Heatmap*/
 
+.dots {
+    position: relative;
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: var(--txt-color-1);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    animation: dotAnim 1s ease-in-out infinite alternate;
+}
+
+.dot1 {
+    height: 35px;
+    width: 35px;
+    background-color: var(--txt-color-1);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+}
+
+.dot2 {
+    float: right;
+    height: 35px;
+    width: 35px;
+    background-color: var(--txt-color-1);
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+}
+
+@keyframes dotAnim {
+    0% {
+        left: 0px;
+        top: 6px;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        left: calc(100% - 27px);
+        top: 6px;
+    }
+}
+
+.path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 3s linear infinite;
+}
+
+.exampleContainer svg {
+    display: block;
+    margin: auto;
+}
+
+@keyframes dash {
+    from {
+        stroke-dashoffset: 990;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
 @media only screen and (max-width: 900px) {
     #root {
         margin: 0 8rem;
     }
     .gridStats {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .gridLogin {
         grid-template-columns: repeat(1, 1fr);
     }
     .disableSmallScreen {
@@ -356,5 +473,12 @@ header {
     }
     .chartContainer {
         padding: 20rem 0 50rem 10rem;
+    }
+    .exampleContainer {
+        padding: 20rem 10rem 20rem 10rem;
+        margin: 25rem 0 0 0;
+    }
+    .loginForm, .loginExample {
+        padding: 20rem 5rem 30rem 10rem;
     }
 }

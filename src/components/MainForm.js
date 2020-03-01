@@ -7,6 +7,8 @@ import StatsHeatmap from "./StatsHeatmap"
 //TODO 
 //No fetch if response.ok
 //avoud duplicate logs
+//removing logs
+//impressum
 
 const url = "https://lo-app-api.herokuapp.com"
 
@@ -33,7 +35,6 @@ class MainForm extends React.Component {
 
   componentDidMount() {
     const loginData = window.localStorage.getItem('loginData')
-    console.log(loginData)
     if (loginData) {
       this.setLogin(JSON.parse(loginData))
     }
@@ -83,10 +84,11 @@ class MainForm extends React.Component {
 
 
   addEntryHandler = async (id) => {
-    const entry = document.getElementById(id);
-    entry.classList.remove("addedEntryAnimation");
-    void entry.offsetWidth;
-    entry.classList.add("addedEntryAnimation");
+    const entry = document.getElementById(id)
+    entry.classList.remove("addEntryAnimation")
+    void entry.offsetWidth
+    entry.classList.add("addEntryAnimation")
+    entry.classList.add("addLoadingAnimation")
 
     try {
       const response = await fetch((url + "/logs/" + id), {
@@ -98,17 +100,20 @@ class MainForm extends React.Component {
       if (!response.ok) { throw new Error("Log can not deleted") }
 
 
-      this.getLogs()
+      await this.getLogs()
+      entry.classList.remove("addLoadingAnimation")
+
     } catch (e) {
       console.log(e)
+      entry.classList.remove("addLoadingAnimation")
     }
   };
 
   addLogHandler = async (event) => {
     event.preventDefault();
-    var logPrompt = prompt("Please enter log name", "Bananas");
+    const logPrompt = prompt("Please enter log name", "Bananas")
     if (logPrompt == null || logPrompt === "") {
-      alert("Enter Log Name!");
+      alert("Enter Log Name!")
     } else {
       try {
         const response = await fetch(url + "/logs", {
@@ -122,13 +127,14 @@ class MainForm extends React.Component {
         if (!response.ok) { throw new Error('Log can not be created') }
         this.getLogs()
       } catch (e) {
+        alert('duplicate log name!')
         console.log(e)
       }
     }
   };
 
   removeLogHandler = async (id) => {
-    if (window.confirm("Are you sure to delete?")) {
+    if (window.confirm("delete log?")) {
       try {
         const response = await fetch((url + "/logs/" + id), {
           method: 'DELETE',
@@ -155,7 +161,7 @@ class MainForm extends React.Component {
           <li className="logEntry" key={log._id} id={log._id}>
             <div className="logEntryInfo">
               <div className="logEntryTitle">
-                <h2 className={color}>{log.name}</h2> {/* Replace by log.color later */}
+                <h3 className={color}>{log.name}</h3> {/* Replace by log.color later */}
                 {log.numEntries + " "}
               </div>
 

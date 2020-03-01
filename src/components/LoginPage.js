@@ -4,12 +4,14 @@ let logoColor = 0
 
 class LoginPage extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             email: '',
             password: '',
             keepLogged: false,
             error: '',
+            exampleCounter: 0,
+            exampleTime: new Date(Date.now())
         };
     }
 
@@ -39,8 +41,6 @@ class LoginPage extends Component {
 
     createUser = async () => {
         const data = {
-            "name": this.state.email,
-            "age": "1",
             "email": this.state.email,
             "password": this.state.password,
         }
@@ -66,6 +66,16 @@ class LoginPage extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
+    }
+
+    handleCreation = (event) => {
+        if (!this.state.email) { return this.setState({ error: 'Email required' }) }
+        if (!this.state.password) { return this.setState({ error: 'Password required' }) }
+        this.createUser()
+        return this.setState({ error: '' })
+    }
+
+    handleEnter = (event) => {
         if (!this.state.email) { return this.setState({ error: 'Email required' }) }
         if (!this.state.password) { return this.setState({ error: 'Password required' }) }
         this.loginUser()
@@ -84,13 +94,6 @@ class LoginPage extends Component {
         });
     }
 
-    handleCreation = (event) => {
-        if (!this.state.email) { return this.setState({ error: 'Email required' }) }
-        if (!this.state.password) { return this.setState({ error: 'Password required' }) }
-        this.createUser()
-        return this.setState({ error: '' })
-    }
-
     handleKeepLoggedChange = (event) => {
         this.setState({
             keepLogged: !this.state.keepLogged,
@@ -102,37 +105,114 @@ class LoginPage extends Component {
     }
 
     render() {
+        const timeDif = Math.abs(Math.round(((this.state.exampleTime - Date.now()) / 60000)))
         return (
-            <div className="loginForm">
-                <h1 className={"color-" + (logoColor++) % 6}>lo</h1>
-                <hr id="loginLine" />
-                <form onSubmit={this.handleSubmit}>
-                    <div className="loginFormControl">
-                        <label>Email</label>
-                        <input type="text" value={this.state.email} onChange={this.handleUserChange} />
-                    </div>
-                    <div className="loginFormControl">
-                        <label>Password</label>
-                        <input type="password" value={this.state.password} onChange={this.handlePassChange} />
-                    </div>
-                    <div className="form-checkbox">
-                        <input type="checkbox" checked={this.state.keepLogged} onChange={this.handleKeepLoggedChange} />
-                        <label>Keep logged in?</label>
+            <React.Fragment>
+                <div>
+                    <h1 className={"color-" + (logoColor++) % 6}>lo</h1>
+
+                </div>
+
+                <div className="gridLogin">
+
+                    <div>
+                        <div className="loginForm">
+
+                            <form onSubmit={this.handleSubmit}>
+                                <div className="loginFormControl">
+                                    <label>Email</label>
+                                    <input type="email" value={this.state.email} onChange={this.handleUserChange} />
+                                </div>
+                                <div className="loginFormControl">
+                                    <label>Password</label>
+                                    <input type="password" minLength="6" value={this.state.password} onChange={this.handlePassChange} />
+                                </div>
+                                <div className="form-checkbox">
+                                    <input type="checkbox" checked={this.state.keepLogged} onChange={this.handleKeepLoggedChange} />
+                                    <label>Keep logged in?</label>
+                                </div>
+
+                                <input id="loginButton" type="submit" value="Enter" onClick={this.handleEnter} />
+                                <input id="createButton" type="submit" value="Create Account" onClick={this.handleCreation} />
+
+                                {
+                                    this.state.error &&
+                                    <p onClick={this.resetError}>
+                                        <button id="errorButton" onClick={this.resetError}>✖</button>
+                                        <span class="errorMessage">{this.state.error}</span>
+                                    </p>
+                                }
+                            </form>
+                        </div>
                     </div>
 
-                    <input id="loginButton" type="submit" value="Enter" />
-                    <input id="createButton" type="button" value="Create Account" onClick={this.handleCreation} />
+                    <div className="loginExample">
+                        <h2>Keep track of the little things in your life.</h2>
+                        <br />
+                        <span>Whether it is your occasional cheat meal or the amount of times you call your grandma – lo keeps it all.</span>
+                        <div className="exampleContainer">
+                            <div className="exampleGridLogs">
+                                <li className="logEntry">
+                                    <div className="logEntryInfo">
+                                        <div className="logEntryTitle">
+                                            <h3 className="color-3"><span role="img" aria-label="example-log">🍕</span></h3>
+                                            {this.state.exampleCounter + " "}
+                                        </div>
+                                        <span>{"since " + this.state.exampleTime.toLocaleDateString()}</span>
+                                        <br />
+                                        <button className="removeButton">X</button >
+                                    </div>
+                                    <div className={"logEntryAdd "}>
+                                        <button className="addEntryButton" onClick={() => { this.setState({ exampleCounter: this.state.exampleCounter + 1, exampleTime: new Date(Date.now()) }) }}>+</button>
+                                        <br></br>
+                                        <span className={"logEntryTimeDif"}>{timeDif < 60 ? timeDif + "min" : Math.round((timeDif / 60)) + "h"}</span>
+                                    </div>
+                                </li >
+                                <li className="logEntry">
+                                    <div className="logEntryInfo">
+                                        <div className="logEntryTitle">
+                                            <h3 className="color-3">...</h3>
+                                        </div>
+                                        <br /><br />
+                                    </div>
+                                    <div className={"logEntryAdd "}>
+                                        <button className="addEntryButton">+</button>
+                                        <br />
+                                        <span>-</span>
+                                    </div>
+                                </li >
+                            </div>
+                        </div>
 
+                        <br />
 
-                    {
-                        this.state.error &&
-                        <p onClick={this.resetError}>
-                            <button id="errorButton" onClick={this.resetError}>✖</button>
-                            <span class="errorMessage">{this.state.error}</span>
-                        </p>
-                    }
-                </form>
-            </div>
+                        <h2>Everything - Everywhere</h2>
+                        <br />
+                        <span>All entries are synced between your devices.</span>
+                        <div className="exampleContainer">
+                            <div className="dots">
+                                <span className="dot1"></span>
+                                <span className="dot2"></span>
+                                <span className="dot"></span>
+                            </div>
+
+                        </div>
+
+                        <br />
+
+                        <h2>Analyse and Discover</h2>
+                        <br />
+                        <span>Watch your data neatly arranged in our graphs. Discover possible correlations via the cross-correlation matrix. Or simply export your data and do your own evaluation.</span>
+                        <div className="exampleContainer">
+                            <svg height="100" width="280">
+                                <path className="path" stroke="#B043D1" fill="none" d="m2 89.875q16-64 32 0 16 0 16 0 32-128 48-48c16 64 16-96 48 48 16 0 16 0 16 0q16-16 32-64 16-48 32 0" />
+                            </svg>
+
+                        </div>
+                    </div>
+
+                </div>
+            </React.Fragment >
         );
     }
 }
