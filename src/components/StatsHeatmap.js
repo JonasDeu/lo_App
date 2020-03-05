@@ -31,14 +31,14 @@ class StatsHeatmap extends Component {
     }
 
     async componentDidUpdate(prevProps, prevState) {
-        if (prevState.mode !== this.state.mode | prevState.dataTime !== this.state.dataTime | prevProps.change !== this.props.change) {
+        if (prevState.mode !== this.state.mode || prevState.dataTime !== this.state.dataTime || prevProps.change !== this.props.change) {
             this.setState({ heatData: await this.fetchHeatData() })
 
         }
     }
 
     async fetchHeatData() {
-        if (this.state.dataTime < 1 | this.state.dataTime > 300) { return null }
+        if (this.state.dataTime < 1 || this.state.dataTime > 300) { return null }
         try {
             const response = await fetch((this.props.url + "/logs/correlations/" + this.state.mode + "/" + this.state.dataTime), {
                 method: 'GET',
@@ -67,7 +67,7 @@ class StatsHeatmap extends Component {
     }
 
     renderHeatChart = () => {
-        if (typeof this.state.heatData === 'undefined' | !this.state.heatData) {
+        if (typeof this.state.heatData === 'undefined' || !this.state.heatData) {
             return null
         }
 

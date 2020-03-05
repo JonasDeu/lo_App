@@ -29,7 +29,7 @@ class StatsLineChart extends Component {
     }
 
     async componentDidUpdate(prevProps, prevState) {
-        if (prevProps.viewedLog !== this.props.viewedLog | prevState.mode !== this.state.mode | prevState.chartSize !== this.state.chartSize | prevProps.change !== this.props.change) {
+        if (prevProps.viewedLog !== this.props.viewedLog || prevState.mode !== this.state.mode || prevState.chartSize !== this.state.chartSize || prevProps.change !== this.props.change) {
             this.setState({ logData: await this.fetchLogChartData(this.props.viewedLog) })
             this.setState({ combLogData: await this.fetchCombLogChartData(this.props.viewedLog) })
             this.setState({ log: await this.fetchLog(this.props.viewedLog) })
@@ -37,7 +37,7 @@ class StatsLineChart extends Component {
     }
 
     async fetchLog(ID) {
-        if (typeof ID == 'undefined' | !ID) { return null }
+        if (typeof ID === 'undefined' || !ID) { return null }
 
         try {
             const response1 = await fetch((this.props.url + "/logs/" + ID), {
@@ -54,8 +54,8 @@ class StatsLineChart extends Component {
     }
 
     async fetchLogChartData(ID) {
-        if (typeof ID == 'undefined' | !ID) { return null }
-        if (this.state.chartSize < 1 | this.state.chartSize > 300) { return null }
+        if (typeof ID === 'undefined' || !ID) { return null }
+        if (this.state.chartSize < 1 || this.state.chartSize > 300) { return null }
         try {
             const response = await fetch((this.props.url + "/logs/" + ID + "/" + this.state.mode + "/" + this.state.chartSize), {
                 method: 'GET',
@@ -72,7 +72,7 @@ class StatsLineChart extends Component {
     }
 
     async fetchCombLogChartData() {
-        if (this.state.chartSize < 1 | this.state.chartSize > 300) { return null }
+        if (this.state.chartSize < 1 || this.state.chartSize > 300) { return null }
         try {
             const response = await fetch((this.props.url + "/logs/" + this.state.mode + "/" + this.state.chartSize), {
                 method: 'GET',
@@ -102,7 +102,7 @@ class StatsLineChart extends Component {
     }
 
     lastFiveEntries = () => {
-        if (typeof this.state.log === 'undefined' | !this.state.log) { return null }
+        if (typeof this.state.log === 'undefined' || !this.state.log) { return null }
         return (
             this.state.log.entries.slice(-this.state.lastEntriesNumber).reverse().map(entry => {
                 return (
@@ -116,7 +116,7 @@ class StatsLineChart extends Component {
     }
 
     renderLineChart = () => {
-        if (typeof this.state.log === 'undefined' | !this.state.log) { return null }
+        if (typeof this.state.log === 'undefined' || !this.state.log) { return null }
         return (
             <ResponsiveContainer>
                 <LineChart data={this.state.logData} margin={{ top: 5, right: 15, bottom: 10 }}>
@@ -137,7 +137,7 @@ class StatsLineChart extends Component {
     }
 
     renderCombLineChart = () => {
-        if (typeof this.state.combLogData === 'undefined' | !this.state.combLogData) {
+        if (typeof this.state.combLogData === 'undefined' || !this.state.combLogData) {
             return null
         }
 

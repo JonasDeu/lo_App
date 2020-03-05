@@ -168,7 +168,7 @@ class MainForm extends React.Component {
               <span>{"since " + (new Date(log.date)).toLocaleDateString()}</span>
               <br />
               {/*<button className="viewButton" onClick={() => { this.viewedLogChangeHandler(log._id) }} >View</button >*/}
-              <button className="removeButton" onClick={() => { this.removeLogHandler(log._id) }} >X</button >
+              <button className="removeButton" onClick={() => { this.removeLogHandler(log._id) }} >✕</button >
 
             </div>
 
@@ -209,7 +209,7 @@ class MainForm extends React.Component {
           <div>
             <hr />
             <div className="gridLogs">
-              {this.state.token && this.logList()}
+              {this.logList()}
             </div>
             <div className="gridStats">
               <StatsLineChart change={this.state.logs} viewedLog={this.state.viewedLog} logs={this.state.logs} url={url} token={this.state.token} />
