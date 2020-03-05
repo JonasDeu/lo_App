@@ -1,3 +1,5 @@
+/*General*/
+
 :root {
     --main-bg-color: #1D1F28;
     --main-fg-color: #282A36;
@@ -10,17 +12,15 @@
     --txt-color-5: #3FDCEE;
 }
 
-/*General*/
+#root {
+    margin: 0 80rem;
+}
 
 body {
     background-color: var(--main-bg-color);
     color: var(--main-txt-color);
     margin: 0px auto 0 auto;
     max-width: 2000rem;
-}
-
-#root {
-    margin: 0 80rem;
 }
 
 body:not(.user-is-tabbing) button:focus, body:not(.user-is-tabbing) input:focus, body:not(.user-is-tabbing) select:focus, body:not(.user-is-tabbing) textarea:focus {
@@ -35,28 +35,44 @@ button:hover {
     color: var(--txt-color-1);
 }
 
-.gridStats {
-    margin-top: 20rem;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8rem;
+/*END General*/
+
+/*Login Page*/
+
+#loginLogo {
+    font-size: 300rem;
+    margin: 130rem auto 0 auto;
+    width: 420rem;
+    text-align: center;
+    padding-right: 20rem
 }
 
 .gridLogin {
     margin-top: 20rem;
     display: grid;
-    grid-template-columns: 350rem auto;
-    gap: 20rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 15rem;
 }
 
-.loginForm, .loginExample {
+#loginOverlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.loginExample {
     background-color: var(--main-fg-color);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     border: 1px solid var(--txt-color-1);
-    margin-bottom: 15rem;
     border-radius: 3px;
     padding: 25rem 30rem 30rem 30rem;
 }
@@ -68,15 +84,36 @@ button:hover {
     border-radius: 3px;
 }
 
-/*END General*/
+/*END Login Page*/
 
 /*Login Form*/
 
-#loginLine {
-    margin-bottom: 25rem;
+.loginForm {
+    background-color: var(--main-fg-color);
+    border: 1px solid var(--txt-color-1);
+    border-radius: 3px;
+    padding: 25rem 30rem 25rem 30rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    min-width: 260rem;
+    max-width: 470rem;
+    height: 290rem;
+    cursor: default;
+    z-index: 500;
 }
 
-#loginButton, .downloadButton, #createButton {
+.closeLoginForm {
+    position: absolute;
+    right: 30rem;
+    font-size: 25rem;
+    z-index: 3;
+}
+
+#loginButton, .downloadButton, #createButton, #showLoginFormButton {
     border: 1px solid var(--main-txt-color);
     background: none;
     color: var(--main-txt-color);
@@ -85,10 +122,17 @@ button:hover {
     margin-right: 10rem
 }
 
-#loginButton:hover, .downloadButton:hover, #createButton:hover, #loginButton:focus, .downloadButton:focus, #createButton:focus {
+#showLoginFormButton {
+    padding: 7rem 25rem;
+    font-size: 23rem;
+    margin: 0;
+    display: block;
+    margin: -30rem auto 60rem auto;
+}
+
+#loginButton:hover, .downloadButton:hover, #createButton:hover, #showLoginFormButton:hover, #loginButton:focus, .downloadButton:focus, #createButton:focus, #showLoginFormButton:focus {
     background: var(--main-txt-color);
     color: var(--main-bg-color);
-    padding: 2rem 10rem;
 }
 
 .loginFormControl {
@@ -116,17 +160,85 @@ button:hover {
     font-size: 14rem;
 }
 
-.createAccountHr {
-    margin-bottom: 20rem;
-}
-
 #errorButton {
     margin-right: 5rem;
+    margin-top: 5rem;
 }
 
 /*END Login Form*/
 
-/*Main Layout*/
+/*Login Examples*/
+
+.dots {
+    position: relative;
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: var(--txt-color-1);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    animation: dotAnim 1s ease-in-out infinite alternate;
+}
+
+.dot1 {
+    height: 35px;
+    width: 35px;
+    background-color: var(--txt-color-1);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+}
+
+.dot2 {
+    float: right;
+    height: 35px;
+    width: 35px;
+    background-color: var(--txt-color-1);
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+}
+
+@keyframes dotAnim {
+    0% {
+        left: 0px;
+        top: 6px;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        left: calc(100% - 27px);
+        top: 6px;
+    }
+}
+
+.path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 3s linear infinite;
+}
+
+.exampleContainer svg {
+    display: block;
+    margin: auto;
+}
+
+@keyframes dash {
+    from {
+        stroke-dashoffset: 990;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/*END Login Examples*/
+
+/*Main Page*/
 
 header {
     display: grid;
@@ -136,10 +248,6 @@ header {
 
 #logout {
     text-align: right;
-}
-
-#logout button:hover {
-    color: var(--txt-color-1)
 }
 
 #email {
@@ -174,6 +282,13 @@ header {
     width: 100%;
     display: table;
     table-layout: fixed;
+}
+
+.logEntryTitle {
+    margin-bottom: 3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .logEntryInfo {
@@ -255,18 +370,19 @@ header {
     }
 }
 
-.logEntryTitle {
-    margin-bottom: 3rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 .viewButton {
     margin-right: 15rem;
 }
 
-/*END Main Layout*/
+.gridStats {
+    margin-top: 20rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8rem;
+}
+
+/*END Main Page*/
 
 /*LineChart*/
 
@@ -388,74 +504,7 @@ header {
 
 /*END Heatmap*/
 
-.dots {
-    position: relative;
-}
-
-.dot {
-    height: 25px;
-    width: 25px;
-    background-color: var(--txt-color-1);
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-    animation: dotAnim 1s ease-in-out infinite alternate;
-}
-
-.dot1 {
-    height: 35px;
-    width: 35px;
-    background-color: var(--txt-color-1);
-    border-radius: 50%;
-    display: inline-block;
-    position: absolute;
-}
-
-.dot2 {
-    float: right;
-    height: 35px;
-    width: 35px;
-    background-color: var(--txt-color-1);
-    border-radius: 50%;
-    position: absolute;
-    right: 0;
-}
-
-@keyframes dotAnim {
-    0% {
-        left: 0px;
-        top: 6px;
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        left: calc(100% - 27px);
-        top: 6px;
-    }
-}
-
-.path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: dash 3s linear infinite;
-}
-
-.exampleContainer svg {
-    display: block;
-    margin: auto;
-}
-
-@keyframes dash {
-    from {
-        stroke-dashoffset: 990;
-    }
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1000px) {
     #root {
         margin: 0 8rem;
     }
@@ -478,7 +527,21 @@ header {
         padding: 20rem 10rem 20rem 10rem;
         margin: 25rem 0 0 0;
     }
-    .loginForm, .loginExample {
+    .loginExample {
         padding: 20rem 5rem 30rem 10rem;
+    }
+    #loginLogo {
+        font-size: 150rem;
+        margin: auto;
+        width: 220rem;
+        text-align: center;
+        padding-right: 15rem
+    }
+    #showLoginFormButton {
+        padding: 4rem 15rem;
+        font-size: 20rem;
+        margin: 0;
+        display: block;
+        margin: -20rem auto 40rem auto;
     }
 }

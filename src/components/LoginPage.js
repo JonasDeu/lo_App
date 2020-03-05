@@ -85,66 +85,70 @@ class LoginPage extends Component {
     handleUserChange = (event) => {
         this.setState({
             email: event.target.value,
-        });
+        })
     };
 
     handlePassChange = (event) => {
         this.setState({
             password: event.target.value,
-        });
+        })
     }
 
     handleKeepLoggedChange = (event) => {
-        this.setState({
-            keepLogged: !this.state.keepLogged,
-        });
+        this.setState((prevState) => {
+            return { keepLogged: !prevState.keepLogged }
+        })
     }
 
     resetError = () => {
         this.setState({ error: '' });
     }
 
+    showLoginForm = (visible) => {
+        visible ? document.getElementById("loginOverlay").style.display = "block" : document.getElementById("loginOverlay").style.display = "none"
+    }
+
     render() {
         const timeDif = Math.abs(Math.round(((this.state.exampleTime - Date.now()) / 60000)))
         return (
             <React.Fragment>
-                <div>
-                    <h1 className={"color-" + (logoColor++) % 6}>lo</h1>
+                <h1 className={"color-" + (logoColor++) % 6} id="loginLogo">lo</h1>
+
+                <input id="showLoginFormButton" type="submit" value="Enter" onClick={() => { this.showLoginForm(true) }} />
+
+                <div id="loginOverlay">
+                    <div className="loginForm">
+                        <button className="closeLoginForm" onClick={() => { this.showLoginForm(false) }}>✕</button>
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="loginFormControl">
+                                <label>Email</label>
+                                <input type="email" value={this.state.email} onChange={this.handleUserChange} />
+                            </div>
+                            <div className="loginFormControl">
+                                <label>Password</label>
+                                <input type="password" minLength="6" value={this.state.password} onChange={this.handlePassChange} />
+                            </div>
+                            <div className="form-checkbox">
+                                <input type="checkbox" checked={this.state.keepLogged} onChange={this.handleKeepLoggedChange} />
+                                <label>Keep logged in?</label>
+                            </div>
+
+                            <input id="loginButton" type="submit" value="Enter" onClick={this.handleEnter} />
+                            <input id="createButton" type="submit" value="Create Account" onClick={this.handleCreation} />
+
+                            {
+                                this.state.error &&
+                                <p onClick={this.resetError}>
+                                    <button id="errorButton" onClick={this.resetError}>✕</button>
+                                    <span className="errorMessage">{this.state.error}</span>
+                                </p>
+                            }
+                        </form>
+                    </div>
 
                 </div>
 
                 <div className="gridLogin">
-
-                    <div>
-                        <div className="loginForm">
-
-                            <form onSubmit={this.handleSubmit}>
-                                <div className="loginFormControl">
-                                    <label>Email</label>
-                                    <input type="email" value={this.state.email} onChange={this.handleUserChange} />
-                                </div>
-                                <div className="loginFormControl">
-                                    <label>Password</label>
-                                    <input type="password" minLength="6" value={this.state.password} onChange={this.handlePassChange} />
-                                </div>
-                                <div className="form-checkbox">
-                                    <input type="checkbox" checked={this.state.keepLogged} onChange={this.handleKeepLoggedChange} />
-                                    <label>Keep logged in?</label>
-                                </div>
-
-                                <input id="loginButton" type="submit" value="Enter" onClick={this.handleEnter} />
-                                <input id="createButton" type="submit" value="Create Account" onClick={this.handleCreation} />
-
-                                {
-                                    this.state.error &&
-                                    <p onClick={this.resetError}>
-                                        <button id="errorButton" onClick={this.resetError}>✖</button>
-                                        <span class="errorMessage">{this.state.error}</span>
-                                    </p>
-                                }
-                            </form>
-                        </div>
-                    </div>
 
                     <div className="loginExample">
                         <h2>Keep track of the little things in your life.</h2>
@@ -160,10 +164,14 @@ class LoginPage extends Component {
                                         </div>
                                         <span>{"since " + this.state.exampleTime.toLocaleDateString()}</span>
                                         <br />
-                                        <button className="removeButton">X</button >
+                                        <button className="removeButton">✕</button >
                                     </div>
                                     <div className={"logEntryAdd "}>
-                                        <button className="addEntryButton" onClick={() => { this.setState({ exampleCounter: this.state.exampleCounter + 1, exampleTime: new Date(Date.now()) }) }}>+</button>
+                                        <button className="addEntryButton" onClick={() => {
+                                            this.setState((prevState) => {
+                                                return { exampleCounter: prevState.exampleCounter + 1, exampleTime: new Date(Date.now()) }
+                                            })
+                                        }}>+</button>
                                         <br></br>
                                         <span className={"logEntryTimeDif"}>{timeDif < 60 ? timeDif + "min" : Math.round((timeDif / 60)) + "h"}</span>
                                     </div>
@@ -183,9 +191,21 @@ class LoginPage extends Component {
                                 </li >
                             </div>
                         </div>
+                    </div>
 
+                    <div className="loginExample">
+                        <h2>Analyse and Discover</h2>
                         <br />
+                        <span>Watch your data neatly arranged in our graphs. Discover possible correlations via the cross-correlation matrix. Or simply export your data and do your own evaluation.</span>
+                        <div className="exampleContainer">
+                            <svg height="100" width="280">
+                                <path className="path" stroke="#B043D1" fill="none" d="m2 89.875q16-64 32 0 16 0 16 0 32-128 48-48c16 64 16-96 48 48 16 0 16 0 16 0q16-16 32-64 16-48 32 0" />
+                            </svg>
 
+                        </div>
+                    </div>
+
+                    <div className="loginExample">
                         <h2>Everything - Everywhere</h2>
                         <br />
                         <span>All entries are synced between your devices.</span>
@@ -197,19 +217,8 @@ class LoginPage extends Component {
                             </div>
 
                         </div>
-
-                        <br />
-
-                        <h2>Analyse and Discover</h2>
-                        <br />
-                        <span>Watch your data neatly arranged in our graphs. Discover possible correlations via the cross-correlation matrix. Or simply export your data and do your own evaluation.</span>
-                        <div className="exampleContainer">
-                            <svg height="100" width="280">
-                                <path className="path" stroke="#B043D1" fill="none" d="m2 89.875q16-64 32 0 16 0 16 0 32-128 48-48c16 64 16-96 48 48 16 0 16 0 16 0q16-16 32-64 16-48 32 0" />
-                            </svg>
-
-                        </div>
                     </div>
+
 
                 </div>
             </React.Fragment >
