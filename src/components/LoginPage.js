@@ -105,20 +105,20 @@ class LoginPage extends Component {
     }
 
     showLoginForm = (visible) => {
-        visible ? document.getElementById("loginOverlay").style.display = "block" : document.getElementById("loginOverlay").style.display = "none"
+        visible ? document.getElementsByClassName("loginOverlay")[0].style.display = "block" : document.getElementsByClassName("loginOverlay")[0].style.display = "none"
     }
 
     render() {
         const timeDif = Math.abs(Math.round(((this.state.exampleTime - Date.now()) / 60000)))
         return (
             <React.Fragment>
-                <h1 className={"color-" + (logoColor++) % 6} id="loginLogo">lo</h1>
+                <h1 className={"loginLogo color-" + (logoColor++) % 6}>lo</h1>
 
-                <input id="showLoginFormButton" type="submit" value="Enter" onClick={() => { this.showLoginForm(true) }} />
+                <input className="showLoginFormButton" type="submit" value="Enter" onClick={() => { this.showLoginForm(true) }} />
 
-                <div id="loginOverlay">
+                <div className="loginOverlay">
                     <div className="loginForm">
-                        <button className="closeLoginForm" onClick={() => { this.showLoginForm(false) }}>✕</button>
+                        <button className="loginFormClose" onClick={() => { this.showLoginForm(false) }}>✕</button>
                         <form onSubmit={this.handleSubmit}>
                             <div className="loginFormControl">
                                 <label>Email</label>
@@ -133,13 +133,13 @@ class LoginPage extends Component {
                                 <label>Keep logged in?</label>
                             </div>
 
-                            <input id="loginButton" type="submit" value="Enter" onClick={this.handleEnter} />
-                            <input id="createButton" type="submit" value="Create Account" onClick={this.handleCreation} />
+                            <input className="loginButton" type="submit" value="Enter" onClick={this.handleEnter} />
+                            <input className="createButton" type="submit" value="Create Account" onClick={this.handleCreation} />
 
                             {
                                 this.state.error &&
                                 <p onClick={this.resetError}>
-                                    <button id="errorButton" onClick={this.resetError}>✕</button>
+                                    <button className="errorButton" onClick={this.resetError}>✕</button>
                                     <span className="errorMessage">{this.state.error}</span>
                                 </p>
                             }
@@ -154,8 +154,8 @@ class LoginPage extends Component {
                         <h2>Keep track of the little things in your life.</h2>
                         <br />
                         <span>Whether it is your occasional cheat meal or the amount of times you call your grandma – lo keeps it all.</span>
-                        <div className="exampleContainer">
-                            <div className="exampleGridLogs">
+                        <div className="loginExampleContainer">
+                            <div className="loginExampleLogGrid">
                                 <li className="logEntry">
                                     <div className="logEntryInfo">
                                         <div className="logEntryTitle">
@@ -197,7 +197,7 @@ class LoginPage extends Component {
                         <h2>Analyse and Discover</h2>
                         <br />
                         <span>Watch your data neatly arranged in our graphs. Discover possible correlations via the cross-correlation matrix. Or simply export your data and do your own evaluation.</span>
-                        <div className="exampleContainer">
+                        <div className="loginExampleContainer">
                             <svg height="100" width="280">
                                 <path className="path" stroke="#B043D1" fill="none" d="m2 89.875q16-64 32 0 16 0 16 0 32-128 48-48c16 64 16-96 48 48 16 0 16 0 16 0q16-16 32-64 16-48 32 0" />
                             </svg>
@@ -209,7 +209,7 @@ class LoginPage extends Component {
                         <h2>Everything - Everywhere</h2>
                         <br />
                         <span>All entries are synced between your devices.</span>
-                        <div className="exampleContainer">
+                        <div className="loginExampleContainer">
                             <div className="dots">
                                 <span className="dot1"></span>
                                 <span className="dot2"></span>

@@ -39,7 +39,7 @@ button:hover {
 
 /*Login Page*/
 
-#loginLogo {
+.loginLogo {
     font-size: 300rem;
     margin: 130rem auto 0 auto;
     width: 420rem;
@@ -54,7 +54,7 @@ button:hover {
     gap: 15rem;
 }
 
-#loginOverlay {
+.loginOverlay {
     display: none;
     position: fixed;
     width: 100%;
@@ -77,7 +77,7 @@ button:hover {
     padding: 25rem 30rem 30rem 30rem;
 }
 
-.exampleContainer {
+.loginExampleContainer {
     padding: 40rem;
     margin: 20rem 0 20rem 0;
     background-color: var(--main-bg-color);
@@ -106,14 +106,14 @@ button:hover {
     z-index: 500;
 }
 
-.closeLoginForm {
+.loginFormClose {
     position: absolute;
     right: 30rem;
     font-size: 25rem;
     z-index: 3;
 }
 
-#loginButton, .downloadButton, #createButton, #showLoginFormButton {
+.loginButton, .downloadButton, .createButton, .showLoginFormButton {
     border: 1px solid var(--main-txt-color);
     background: none;
     color: var(--main-txt-color);
@@ -122,7 +122,7 @@ button:hover {
     margin-right: 10rem
 }
 
-#showLoginFormButton {
+.showLoginFormButton {
     padding: 7rem 25rem;
     font-size: 23rem;
     margin: 0;
@@ -130,7 +130,7 @@ button:hover {
     margin: -30rem auto 60rem auto;
 }
 
-#loginButton:hover, .downloadButton:hover, #createButton:hover, #showLoginFormButton:hover, #loginButton:focus, .downloadButton:focus, #createButton:focus, #showLoginFormButton:focus {
+.loginButton:hover, .downloadButton:hover, .createButton:hover, .showLoginFormButton:hover, .loginButton:focus, .downloadButton:focus, .createButton:focus, .showLoginFormButton:focus {
     background: var(--main-txt-color);
     color: var(--main-bg-color);
 }
@@ -160,7 +160,7 @@ button:hover {
     font-size: 14rem;
 }
 
-#errorButton {
+.errorButton {
     margin-right: 5rem;
     margin-top: 5rem;
 }
@@ -222,7 +222,7 @@ button:hover {
     animation: dash 3s linear infinite;
 }
 
-.exampleContainer svg {
+.loginExampleContainer svg {
     display: block;
     margin: auto;
 }
@@ -246,11 +246,11 @@ header {
     margin: 10px 0px;
 }
 
-#logout {
+.headerLogout {
     text-align: right;
 }
 
-#email {
+.headerEmail {
     text-align: center;
     margin: 0 4rem 0 4rem;
     white-space: nowrap;
@@ -258,7 +258,7 @@ header {
     text-overflow: ellipsis;
 }
 
-.gridLogs, .exampleGridLogs {
+.gridLogs, .loginExampleLogGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 8rem;
@@ -505,17 +505,43 @@ header {
 /*END Heatmap*/
 
 @media only screen and (max-width: 1000px) {
+    /*General*/
     #root {
         margin: 0 8rem;
     }
-    .gridStats {
-        grid-template-columns: repeat(1, 1fr);
+    /*END General*/
+    /*Login*/
+    .loginLogo {
+        font-size: 150rem;
+        margin: auto;
+        width: 220rem;
+        text-align: center;
+        padding-right: 15rem
+    }
+    .showLoginFormButton {
+        padding: 4rem 15rem;
+        font-size: 20rem;
+        margin: 0;
+        display: block;
+        margin: -20rem auto 40rem auto;
     }
     .gridLogin {
         grid-template-columns: repeat(1, 1fr);
     }
-    .disableSmallScreen {
+    .loginExample {
+        padding: 20rem 5rem 30rem 10rem;
+    }
+    .loginExampleContainer {
+        padding: 20rem 10rem 20rem 10rem;
+        margin: 25rem 0 0 0;
+    }
+    /*END Login*/
+    /*Main Page*/
+    .downloadButtonBigScreen {
         display: none;
+    }
+    .gridStats {
+        grid-template-columns: repeat(1, 1fr);
     }
     .heatMapContainer {
         padding: 10rem 10rem 60rem 10rem;
@@ -523,25 +549,5 @@ header {
     .chartContainer {
         padding: 20rem 0 50rem 10rem;
     }
-    .exampleContainer {
-        padding: 20rem 10rem 20rem 10rem;
-        margin: 25rem 0 0 0;
-    }
-    .loginExample {
-        padding: 20rem 5rem 30rem 10rem;
-    }
-    #loginLogo {
-        font-size: 150rem;
-        margin: auto;
-        width: 220rem;
-        text-align: center;
-        padding-right: 15rem
-    }
-    #showLoginFormButton {
-        padding: 4rem 15rem;
-        font-size: 20rem;
-        margin: 0;
-        display: block;
-        margin: -20rem auto 40rem auto;
-    }
+    /*END Main Page*/
 }

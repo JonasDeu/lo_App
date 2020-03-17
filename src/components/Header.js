@@ -45,10 +45,10 @@ class Header extends Component {
         return (
             <header>
                 <span >
-                    <button className="downloadButton" onClick={() => { this.downloadHandler() }} >Download <span className="disableSmallScreen">Logs</span></button >
+                    <button className="downloadButton" onClick={() => { this.downloadHandler() }} >Download <span className="downloadButtonBigScreen">Logs</span></button >
                 </span>
-                <span id="email" className={"color-" + (headerColor++) % 6}>{this.props.userData.user.name}</span>
-                <span id="logout"><button onClick={this.logoutHandler}>Logout</button></span>
+                <span className={"headerEmail color-" + (headerColor++) % 6}>{this.props.userData.user.name}</span>
+                <span className="headerLogout"><button onClick={this.logoutHandler}>Logout</button></span>
             </header>
         );
     }
