@@ -147,35 +147,41 @@ class StatsHeatmap extends Component {
 
 	render() {
 		return (
-			<div>
-				<div className="heatMapContainer">
-					{this.renderHeatChart()}
-					<form className="heatMapForm" onSubmit={this.handleSubmit}>
-						<input
-							className="viewEntryFormControl"
-							name="Chart Size"
-							type="number"
-							min="1"
-							max="500"
-							value={this.state.dataTime}
-							onChange={this.handleDataTimeChange}
-						/>
-						<select
-							className="viewEntryFormControl"
-							name="Mode"
-							value={this.state.mode}
-							onChange={this.handleModeChange}
-						>
-							<option name="Days" value="day">
-								Days
-							</option>
-							<option name="Hours" value="hour">
-								Hours
-							</option>
-						</select>
-					</form>
-				</div>
-			</div>
+			<React.Fragment>
+				{this.state.heatData &&
+					this.state.heatData.labels.length !== 0 && (
+						<div className="heatMapContainer">
+							{this.renderHeatChart()}
+							<form
+								className="heatMapForm"
+								onSubmit={this.handleSubmit}
+							>
+								<input
+									className="viewEntryFormControl"
+									name="Chart Size"
+									type="number"
+									min="1"
+									max="500"
+									value={this.state.dataTime}
+									onChange={this.handleDataTimeChange}
+								/>
+								<select
+									className="viewEntryFormControl"
+									name="Mode"
+									value={this.state.mode}
+									onChange={this.handleModeChange}
+								>
+									<option name="Days" value="day">
+										Days
+									</option>
+									<option name="Hours" value="hour">
+										Hours
+									</option>
+								</select>
+							</form>
+						</div>
+					)}
+			</React.Fragment>
 		)
 	}
 }
