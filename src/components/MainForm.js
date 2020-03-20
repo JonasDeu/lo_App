@@ -12,15 +12,6 @@ import StatsHeatmap from "./StatsHeatmap"
 
 const url = "https://lo-app-api.herokuapp.com"
 
-const handleFirstTab = e => {
-	if (e.keyCode === 9) {
-		// Tab Key
-		document.body.classList.add("user-is-tabbing")
-		window.removeEventListener("keydown", handleFirstTab)
-	}
-}
-window.addEventListener("keydown", handleFirstTab)
-
 class MainForm extends React.Component {
 	constructor(props) {
 		super(props)
@@ -29,8 +20,24 @@ class MainForm extends React.Component {
 			token: "",
 			logs: null,
 			userData: null,
-			viewedLog: null
+			viewedLog: null,
+			deferredPrompt: null
 		}
+
+		window.addEventListener("beforeinstallprompt", e => {
+			e.preventDefault()
+			this.setState({ deferredPrompt: e })
+		})
+
+		const handleFirstTab = e => {
+			if (e.keyCode === 9) {
+				// Tab Key
+				document.body.classList.add("user-is-tabbing")
+				window.removeEventListener("keydown", handleFirstTab)
+			}
+		}
+
+		window.addEventListener("keydown", handleFirstTab)
 	}
 
 	componentDidMount() {
@@ -156,10 +163,8 @@ class MainForm extends React.Component {
 
 	logList = () => {
 		if (this.state.logs) {
-			const tempLog = this.state.logs.map(log => {
-				const timeDif = Math.abs(
-					Math.round((new Date(log.lastEntry) - Date.now()) / 60000)
-				)
+			const logList = this.state.logs.map(log => {
+				const timeDif = Math.abs(Math.round((new Date(log.lastEntry) - Date.now()) / 60000))
 				const color = "color-" + 3 //Math.floor(Math.random() * 6)
 				//const colorHover = "color-1-hover"
 
@@ -167,23 +172,18 @@ class MainForm extends React.Component {
 					<li className="logEntry" key={log._id} id={log._id}>
 						<div className="logEntryInfo">
 							<div className="logEntryTitle">
-								<h3 className={color}>{log.name}</h3>{" "}
-								{/* Replace by log.color later */}
+								<h3 className={color}>{log.name}</h3> {/* Replace by log.color later */}
 								{log.numEntries + " "}
 							</div>
 
-							<span>
-								{"since " +
-									new Date(log.date).toLocaleDateString()}
-							</span>
+							<span>{"since " + new Date(log.date).toLocaleDateString()}</span>
 							<br />
 							{/*<button className="viewButton" onClick={() => { this.viewedLogChangeHandler(log._id) }} >View</button >*/}
 							<button
 								className="removeButton"
 								onClick={() => {
 									this.removeLogHandler(log._id)
-								}}
-							>
+								}}>
 								✕
 							</button>
 						</div>
@@ -193,13 +193,12 @@ class MainForm extends React.Component {
 								className="addEntryButton"
 								onClick={() => {
 									this.addEntryHandler(log._id)
-								}}
-							>
+								}}>
 								+
 							</button>
 							<br></br>
 							<span className={"logEntryTimeDif"}>
-								{timeDif
+								{!isNaN(timeDif)
 									? timeDif < 60
 										? timeDif + "min"
 										: Math.round(timeDif / 60) + "h"
@@ -212,7 +211,7 @@ class MainForm extends React.Component {
 
 			return (
 				<React.Fragment>
-					{tempLog}
+					{logList}
 					<li className="logEntry">
 						<button key={"addLog"} onClick={this.addLogHandler}>
 							+ Add new Log +
@@ -239,6 +238,7 @@ class MainForm extends React.Component {
 			<div>
 				{this.state.token ? (
 					<Header
+						deferredPrompt={this.state.deferredPrompt}
 						userData={this.state.userData}
 						setLogin={this.setLogin}
 					/>
@@ -257,11 +257,7 @@ class MainForm extends React.Component {
 								url={url}
 								token={this.state.token}
 							/>
-							<StatsHeatmap
-								change={this.state.logs}
-								url={url}
-								token={this.state.token}
-							/>
+							<StatsHeatmap change={this.state.logs} url={url} token={this.state.token} />
 						</div>
 					</div>
 				)}
@@ -269,8 +265,7 @@ class MainForm extends React.Component {
 					style={{ float: "left", clear: "both" }} //for scroll to bottom
 					ref={el => {
 						this.pageEnd = el
-					}}
-				></div>
+					}}></div>
 			</div>
 		)
 	}
