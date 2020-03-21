@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
 const getGradientColor = value => {
-	const color1 = "18E3C8"
+	const color1 = "B043D1"
 	const color2 = "282A36"
 	const ratio = Math.abs(value)
 	const hex = function(x) {
@@ -10,16 +10,13 @@ const getGradientColor = value => {
 	}
 
 	const r = Math.ceil(
-		parseInt(color1.substring(0, 2), 16) * ratio +
-			parseInt(color2.substring(0, 2), 16) * (1 - ratio)
+		parseInt(color1.substring(0, 2), 16) * ratio + parseInt(color2.substring(0, 2), 16) * (1 - ratio)
 	)
 	const g = Math.ceil(
-		parseInt(color1.substring(2, 4), 16) * ratio +
-			parseInt(color2.substring(2, 4), 16) * (1 - ratio)
+		parseInt(color1.substring(2, 4), 16) * ratio + parseInt(color2.substring(2, 4), 16) * (1 - ratio)
 	)
 	const b = Math.ceil(
-		parseInt(color1.substring(4, 6), 16) * ratio +
-			parseInt(color2.substring(4, 6), 16) * (1 - ratio)
+		parseInt(color1.substring(4, 6), 16) * ratio + parseInt(color2.substring(4, 6), 16) * (1 - ratio)
 	)
 
 	return hex(r) + hex(g) + hex(b)
@@ -55,11 +52,7 @@ class StatsHeatmap extends Component {
 		}
 		try {
 			const response = await fetch(
-				this.props.url +
-					"/logs/correlations/" +
-					this.state.mode +
-					"/" +
-					this.state.dataTime,
+				this.props.url + "/logs/correlations/" + this.state.mode + "/" + this.state.dataTime,
 				{
 					method: "GET",
 					headers: {
@@ -89,10 +82,7 @@ class StatsHeatmap extends Component {
 	}
 
 	renderHeatChart = () => {
-		if (
-			typeof this.state.heatData === "undefined" ||
-			!this.state.heatData
-		) {
+		if (typeof this.state.heatData === "undefined" || !this.state.heatData) {
 			return null
 		}
 
@@ -101,29 +91,25 @@ class StatsHeatmap extends Component {
 		})
 
 		const body = this.state.heatData.labels.map((label, labelIndex) => {
-			const values = this.state.heatData.correlations[labelIndex].map(
-				(value, valueIndex) => {
-					let colorValue = Math.abs(value)
-					colorValue < 0.9
-						? (colorValue = 0)
-						: (colorValue = (colorValue - 0.9) * 10)
-					var style = {
-						backgroundColor: "#" + getGradientColor(colorValue)
-					}
-					if (labelIndex === valueIndex) {
-						return <td key={valueIndex}>-</td>
-					}
-					if (value === null) {
-						return <td key={valueIndex}>-</td>
-					}
-					return (
-						<td style={style} key={valueIndex}>
-							{" "}
-							{parseFloat(value).toFixed(2)}
-						</td>
-					)
+			const values = this.state.heatData.correlations[labelIndex].map((value, valueIndex) => {
+				let colorValue = Math.abs(value)
+				colorValue < 0.9 ? (colorValue = 0) : (colorValue = (colorValue - 0.9) * 10)
+				var style = {
+					backgroundColor: "#" + getGradientColor(colorValue)
 				}
-			)
+				if (labelIndex === valueIndex) {
+					return <td key={valueIndex}>-</td>
+				}
+				if (value === null) {
+					return <td key={valueIndex}>-</td>
+				}
+				return (
+					<td style={style} key={valueIndex}>
+						{" "}
+						{parseFloat(value).toFixed(2)}
+					</td>
+				)
+			})
 			return (
 				<tr key={labelIndex}>
 					<th>{label}</th>
@@ -148,39 +134,34 @@ class StatsHeatmap extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				{this.state.heatData &&
-					this.state.heatData.labels.length !== 0 && (
-						<div className="heatMapContainer">
-							{this.renderHeatChart()}
-							<form
-								className="heatMapForm"
-								onSubmit={this.handleSubmit}
-							>
-								<input
-									className="viewEntryFormControl"
-									name="Chart Size"
-									type="number"
-									min="1"
-									max="500"
-									value={this.state.dataTime}
-									onChange={this.handleDataTimeChange}
-								/>
-								<select
-									className="viewEntryFormControl"
-									name="Mode"
-									value={this.state.mode}
-									onChange={this.handleModeChange}
-								>
-									<option name="Days" value="day">
-										Days
-									</option>
-									<option name="Hours" value="hour">
-										Hours
-									</option>
-								</select>
-							</form>
-						</div>
-					)}
+				{this.state.heatData && this.state.heatData.labels.length !== 0 && (
+					<div className="heatMapContainer">
+						{this.renderHeatChart()}
+						<form className="heatMapForm" onSubmit={this.handleSubmit}>
+							<input
+								className="viewEntryFormControl"
+								name="Chart Size"
+								type="number"
+								min="1"
+								max="500"
+								value={this.state.dataTime}
+								onChange={this.handleDataTimeChange}
+							/>
+							<select
+								className="viewEntryFormControl"
+								name="Mode"
+								value={this.state.mode}
+								onChange={this.handleModeChange}>
+								<option name="Days" value="day">
+									Days
+								</option>
+								<option name="Hours" value="hour">
+									Hours
+								</option>
+							</select>
+						</form>
+					</div>
+				)}
 			</React.Fragment>
 		)
 	}

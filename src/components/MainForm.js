@@ -219,14 +219,12 @@ class MainForm extends React.Component {
 			})
 
 			return (
-				<React.Fragment>
+				<ul className="logList">
 					{logList}
-					<li className="logEntry">
-						<button key={"addLog"} onClick={this.addLogHandler}>
-							+ Add new Log +
-						</button>
+					<li className="logEntry logEntryNewEntry" onClick={this.addLogHandler}>
+						<button key={"addLog"}>+ Add new Log +</button>
 					</li>
-				</React.Fragment>
+				</ul>
 			)
 		}
 	}
@@ -257,36 +255,41 @@ class MainForm extends React.Component {
 				{this.state.token && (
 					<div>
 						<hr />
-						<div className="gridLogs">{this.logList()}</div>
+						<div className="gridMain">
+							{this.logList()}
 
-						<div
-							style={{ float: "left", clear: "both" }} //for scroll to bottom
-							ref={el => {
-								this.pageEnd = el
-							}}></div>
-
-						{this.state.viewedLog && (
-							<LogView
-								change={this.state.logs}
-								viewedLog={this.state.viewedLog}
-								logs={this.state.logs}
-								url={url}
-								token={this.state.token}
-							/>
-						)}
-
-						<div className="gridStats">
-							<StatsLineChart
-								change={this.state.logs}
-								viewedLog={this.state.viewedLog}
-								logs={this.state.logs}
-								url={url}
-								token={this.state.token}
-							/>
-							<StatsHeatmap change={this.state.logs} url={url} token={this.state.token} />
+							<div className="stats">
+								<div
+									style={{ float: "left", clear: "both" }} //for scroll to bottom
+									ref={el => {
+										this.pageEnd = el
+									}}></div>
+								{this.state.viewedLog && (
+									<React.Fragment>
+										<LogView
+											change={this.state.logs}
+											viewedLog={this.state.viewedLog}
+											logs={this.state.logs}
+											url={url}
+											token={this.state.token}
+										/>
+									</React.Fragment>
+								)}
+								<div className="gridStats">
+									<StatsLineChart
+										change={this.state.logs}
+										viewedLog={this.state.viewedLog}
+										logs={this.state.logs}
+										url={url}
+										token={this.state.token}
+									/>
+									<StatsHeatmap change={this.state.logs} url={url} token={this.state.token} />
+								</div>
+							</div>
 						</div>
 					</div>
 				)}
+
 				{this.state.pwaPrompt &&
 				this.state.deferredPrompt &&
 				!window.matchMedia("(display-mode: standalone)").matches ? (
