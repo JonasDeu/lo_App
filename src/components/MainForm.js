@@ -1,6 +1,7 @@
 import React from "react"
 import LoginPage from "./LoginPage"
 import Header from "./Header"
+import LogView from "./LogView"
 import StatsLineChart from "./StatsLineChart"
 import StatsHeatmap from "./StatsHeatmap"
 import PwaPrompt from "./PwaPrompt"
@@ -180,7 +181,13 @@ class MainForm extends React.Component {
 
 							<span>{"since " + new Date(log.date).toLocaleDateString()}</span>
 							<br />
-							{/*<button className="viewButton" onClick={() => { this.viewedLogChangeHandler(log._id) }} >View</button >*/}
+							<button
+								className="viewButton"
+								onClick={() => {
+									this.viewedLogChangeHandler(log._id)
+								}}>
+								view
+							</button>
 							<button
 								className="removeButton"
 								onClick={() => {
@@ -251,6 +258,23 @@ class MainForm extends React.Component {
 					<div>
 						<hr />
 						<div className="gridLogs">{this.logList()}</div>
+
+						<div
+							style={{ float: "left", clear: "both" }} //for scroll to bottom
+							ref={el => {
+								this.pageEnd = el
+							}}></div>
+
+						{this.state.viewedLog && (
+							<LogView
+								change={this.state.logs}
+								viewedLog={this.state.viewedLog}
+								logs={this.state.logs}
+								url={url}
+								token={this.state.token}
+							/>
+						)}
+
 						<div className="gridStats">
 							<StatsLineChart
 								change={this.state.logs}
@@ -263,12 +287,6 @@ class MainForm extends React.Component {
 						</div>
 					</div>
 				)}
-				<div
-					style={{ float: "left", clear: "both" }} //for scroll to bottom
-					ref={el => {
-						this.pageEnd = el
-					}}></div>
-
 				{this.state.pwaPrompt &&
 				this.state.deferredPrompt &&
 				!window.matchMedia("(display-mode: standalone)").matches ? (

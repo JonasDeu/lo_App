@@ -489,12 +489,6 @@ header {
     margin-right: 5rem;
 }
 
-.lastEntries {
-    padding: 10rem 20rem;
-    background-color: var(--main-fg-color);
-    border-radius: 3px;
-}
-
 /*END LineChart*/
 
 /*Heatmap*/
@@ -553,6 +547,35 @@ header {
 }
 
 /*END Heatmap*/
+
+/*Log View*/
+
+.logViewContainer {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10rem 20rem 30rem 20rem;
+    margin-bottom: 15rem;
+    margin-top: 20rem;
+    background-color: var(--main-fg-color);
+    border-radius: 3px;
+    border: 1px solid var(--main-txt-color);
+}
+
+.logViewChart {
+    margin-top: 25rem;
+}
+
+.logViewChartContainer {
+    height: 300rem;
+}
+
+.logViewEntriesContainer {
+    margin-top: 15rem;
+}
+
+/*END Log View*/
 
 @media only screen and (max-width: 1000px) {
     /*General*/

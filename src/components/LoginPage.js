@@ -8,7 +8,7 @@ class LoginPage extends Component {
 		this.state = {
 			email: "",
 			password: "",
-			keepLogged: false,
+			keepLogged: true,
 			error: "",
 			exampleCounter: 0,
 			exampleTime: new Date(Date.now())
