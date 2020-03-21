@@ -3,6 +3,7 @@ import LoginPage from "./LoginPage"
 import Header from "./Header"
 import StatsLineChart from "./StatsLineChart"
 import StatsHeatmap from "./StatsHeatmap"
+import PwaPrompt from "./PwaPrompt"
 
 //TODO
 //No fetch if response.ok
@@ -21,7 +22,8 @@ class MainForm extends React.Component {
 			logs: null,
 			userData: null,
 			viewedLog: null,
-			deferredPrompt: null
+			deferredPrompt: null,
+			pwaPrompt: true
 		}
 
 		window.addEventListener("beforeinstallprompt", e => {
@@ -229,6 +231,10 @@ class MainForm extends React.Component {
 		}
 	}
 
+	closePwaPromptHandler = () => {
+		this.setState({ pwaPrompt: false })
+	}
+
 	scrollToBottom = () => {
 		this.pageEnd.scrollIntoView({ behavior: "smooth" })
 	}
@@ -237,11 +243,7 @@ class MainForm extends React.Component {
 		return (
 			<div>
 				{this.state.token ? (
-					<Header
-						deferredPrompt={this.state.deferredPrompt}
-						userData={this.state.userData}
-						setLogin={this.setLogin}
-					/>
+					<Header userData={this.state.userData} setLogin={this.setLogin} />
 				) : (
 					<LoginPage setLogin={this.setLogin} />
 				)}
@@ -266,6 +268,17 @@ class MainForm extends React.Component {
 					ref={el => {
 						this.pageEnd = el
 					}}></div>
+
+				{this.state.pwaPrompt &&
+				this.state.deferredPrompt &&
+				!window.matchMedia("(display-mode: standalone)").matches ? (
+					<PwaPrompt
+						deferredPrompt={this.state.deferredPrompt}
+						closePwaPromptHandler={this.closePwaPromptHandler}
+					/>
+				) : (
+					<span></span>
+				)}
 			</div>
 		)
 	}
