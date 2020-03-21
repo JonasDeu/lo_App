@@ -230,6 +230,13 @@ class MainForm extends React.Component {
 	}
 
 	viewedLogChangeHandler = viewedLog => {
+		const entries = document.getElementsByClassName("logEntry")
+		Array.from(entries).forEach(e => {
+			e.classList.remove("viewedLogEntry")
+		})
+		const entry = document.getElementById(viewedLog)
+		entry.classList.add("viewedLogEntry")
+
 		this.setState({ viewedLog })
 		if (window.innerWidth <= 900) {
 			this.scrollToBottom()

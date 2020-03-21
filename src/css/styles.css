@@ -460,6 +460,14 @@ header {
     margin-right: 15rem;
 }
 
+.viewedLogEntry {
+    border-color: var(--txt-color-1);
+}
+
+.viewedLogEntry h3 {
+    color: var(--txt-color-1);
+}
+
 /*END Main Page*/
 
 /*LineChart*/
@@ -594,6 +602,7 @@ header {
 
 .logViewContainer h2 {
     color: var(--txt-color-1);
+    text-transform: lowercase;
 }
 
 .logViewChart {
