@@ -19,7 +19,7 @@
 body {
     background-color: var(--main-bg-color);
     color: var(--main-txt-color);
-    margin: 0px auto 0 auto;
+    margin: 0px auto 50rem auto;
     max-width: 2000rem;
 }
 
@@ -33,6 +33,10 @@ button, select, input {
 
 button:hover {
     color: var(--txt-color-1);
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 /*END General*/
@@ -84,6 +88,26 @@ button:hover {
     border-radius: 3px;
 }
 
+.loginExamplePwa {
+    text-align: center;
+}
+
+.loginExamplePwaFavicon {
+    border: 1px solid var(--main-txt-color);
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.loginExamplePwaButton {
+    vertical-align: middle;
+    margin-left: 15rem;
+    display: inline-block;
+}
+
+/*END Login Page*/
+
+/*PWA Prompt*/
+
 .pwaPrompt {
     position: fixed;
     width: 100%;
@@ -110,11 +134,7 @@ button:hover {
     z-index: 3;
 }
 
-.hidden {
-    visibility: hidden;
-}
-
-/*END Login Page*/
+/*END PWA Prompt*/
 
 /*Login Form*/
 

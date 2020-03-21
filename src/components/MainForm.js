@@ -245,7 +245,7 @@ class MainForm extends React.Component {
 				{this.state.token ? (
 					<Header userData={this.state.userData} setLogin={this.setLogin} />
 				) : (
-					<LoginPage setLogin={this.setLogin} />
+					<LoginPage setLogin={this.setLogin} deferredPrompt={this.state.deferredPrompt} />
 				)}
 				{this.state.token && (
 					<div>
