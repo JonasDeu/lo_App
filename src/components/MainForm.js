@@ -173,7 +173,12 @@ class MainForm extends React.Component {
 
 				return (
 					<li className="logEntry" key={log._id} id={log._id}>
-						<div className="logEntryInfo">
+						<div
+							className="logEntryInfo"
+							onClick={() => {
+								this.viewedLogChangeHandler(log._id)
+							}}
+							tabindex="0">
 							<div className="logEntryTitle">
 								<h3 className={color}>{log.name}</h3> {/* Replace by log.color later */}
 								{log.numEntries + " "}
@@ -181,13 +186,6 @@ class MainForm extends React.Component {
 
 							<span>{"since " + new Date(log.date).toLocaleDateString()}</span>
 							<br />
-							<button
-								className="viewButton"
-								onClick={() => {
-									this.viewedLogChangeHandler(log._id)
-								}}>
-								view
-							</button>
 							<button
 								className="removeButton"
 								onClick={() => {

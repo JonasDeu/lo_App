@@ -23,7 +23,7 @@ body {
     max-width: 2000rem;
 }
 
-body:not(.user-is-tabbing) button:focus, body:not(.user-is-tabbing) input:focus, body:not(.user-is-tabbing) select:focus, body:not(.user-is-tabbing) textarea:focus {
+body:not(.user-is-tabbing) button:focus, body:not(.user-is-tabbing) input:focus, body:not(.user-is-tabbing) select:focus, body:not(.user-is-tabbing) textarea:focus, body:not(.user-is-tabbing) div:focus {
     outline: none;
 }
 
@@ -334,7 +334,7 @@ header {
 }
 
 .logList {
-    flex: 0 0 308px;
+    flex: 0 0 315px;
 }
 
 .stats {
@@ -383,6 +383,10 @@ header {
     border-right: 2px solid var(--main-bg-color);
     margin: 50px;
     overflow: hidden;
+}
+
+.logEntryInfo:hover h3, .logEntryInfo:focus h3 {
+    color: var(--txt-color-1)
 }
 
 .logEntryAdd {
