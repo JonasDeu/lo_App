@@ -123,7 +123,7 @@ class MainForm extends React.Component {
 		event.preventDefault()
 		const logPrompt = prompt("Please enter log name", "Bananas")
 		if (logPrompt == null || logPrompt === "") {
-			alert("Enter Log Name!")
+			console.log("Enter Log Name!")
 		} else {
 			try {
 				const response = await fetch(url + "/logs", {
@@ -157,6 +157,7 @@ class MainForm extends React.Component {
 				if (!response.ok) {
 					throw new Error("Log can not be deleted")
 				}
+				this.setState({ viewedLog: null })
 				this.getLogs()
 			} catch (e) {
 				console.log(e)
@@ -178,23 +179,11 @@ class MainForm extends React.Component {
 							onClick={() => {
 								this.viewedLogChangeHandler(log._id)
 							}}
-							tabindex="0">
+							tabIndex="0">
 							<div className="logEntryTitle">
 								<h3 className={color}>{log.name}</h3> {/* Replace by log.color later */}
-								{log.numEntries + " "}
 							</div>
-
-							<span>{"since " + new Date(log.date).toLocaleDateString()}</span>
-							<br />
-							<button
-								className="removeButton"
-								onClick={() => {
-									this.removeLogHandler(log._id)
-								}}>
-								✕
-							</button>
 						</div>
-
 						<div className={"logEntryAdd "}>
 							<button
 								className="addEntryButton"
@@ -220,7 +209,7 @@ class MainForm extends React.Component {
 				<ul className="logList">
 					{logList}
 					<li className="logEntry logEntryNewEntry" onClick={this.addLogHandler}>
-						<button key={"addLog"}>+ Add new Log +</button>
+						<button key={"addLog"}>+ add new log +</button>
 					</li>
 				</ul>
 			)
@@ -277,6 +266,7 @@ class MainForm extends React.Component {
 											logs={this.state.logs}
 											url={url}
 											token={this.state.token}
+											removeLogHandler={this.removeLogHandler}
 										/>
 									</React.Fragment>
 								)}

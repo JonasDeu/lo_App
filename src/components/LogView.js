@@ -110,6 +110,24 @@ class LogView extends Component {
 			})
 	}
 
+	entryTitle = () => {
+		if (typeof this.state.log === "undefined" || !this.state.log) {
+			return null
+		}
+		console.log(this.state.log)
+		const tempDate = new Date(this.state.log.date)
+		return (
+			" " +
+			this.state.log.numEntries +
+			" entries since " +
+			tempDate.getUTCDate() +
+			"." +
+			tempDate.getMonth() +
+			"." +
+			tempDate.getFullYear()
+		)
+	}
+
 	handleSubmit = event => {
 		event.preventDefault()
 	}
@@ -126,7 +144,15 @@ class LogView extends Component {
 		return (
 			<div className="logViewContainer">
 				<h2>{this.state.log ? this.state.log.name : "Log Chart"} </h2>
+				{this.entryTitle()}
 				<div className="logViewChart">
+					<button
+						className="removeButton"
+						onClick={() => {
+							this.props.removeLogHandler(this.state.log._id)
+						}}>
+						✕
+					</button>
 					<div className="logViewChartContainer">{this.renderLineChart()}</div>
 					<form className="viewEntryForm" onSubmit={this.handleSubmit}>
 						<input
@@ -152,9 +178,8 @@ class LogView extends Component {
 						</select>
 					</form>
 				</div>
-
 				<div className="logViewEntriesContainer">
-					Last {this.state.lastEntriesNumber} entries:
+					<h4>Last {this.state.lastEntriesNumber} entries:</h4>
 					{this.lastFiveEntries()}
 				</div>
 			</div>

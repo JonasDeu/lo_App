@@ -1,42 +1,48 @@
 /*General*/
 
 :root {
-    --main-bg-color: #1D1F28;
-    --main-fg-color: #282A36;
-    --main-txt-color: #FDFDFD;
-    --txt-color-0: #B043D1;
-    --txt-color-1: #18E3C8;
-    --txt-color-2: #FF4971;
-    --txt-color-3: #FF8037;
-    --txt-color-4: #B043D1;
-    --txt-color-5: #3FDCEE;
+	--main-bg-color: #1d1f28;
+	--main-fg-color: #282a36;
+	--main-txt-color: #fdfdfd;
+	--txt-color-0: #b043d1;
+	--txt-color-1: #18e3c8;
+	--txt-color-2: #ff4971;
+	--txt-color-3: #ff8037;
+	--txt-color-4: #b043d1;
+	--txt-color-5: #3fdcee;
 }
 
 #root {
-    margin: 0 80rem;
+	margin: 0 80rem;
 }
 
 body {
-    background-color: var(--main-bg-color);
-    color: var(--main-txt-color);
-    margin: 0px auto 50rem auto;
-    max-width: 2000rem;
+	background-color: var(--main-bg-color);
+	color: var(--main-txt-color);
+	margin: 0px auto 50rem auto;
+	max-width: 2000rem;
 }
 
-body:not(.user-is-tabbing) button:focus, body:not(.user-is-tabbing) input:focus, body:not(.user-is-tabbing) select:focus, body:not(.user-is-tabbing) textarea:focus, body:not(.user-is-tabbing) div:focus {
-    outline: none;
+body:not(.user-is-tabbing) button:focus,
+body:not(.user-is-tabbing) input:focus,
+body:not(.user-is-tabbing) select:focus,
+body:not(.user-is-tabbing) textarea:focus,
+body:not(.user-is-tabbing) div:focus {
+	outline: none;
 }
 
-button, select, input {
-    color: var(--main-txt-color);
+button,
+select,
+input {
+	color: var(--main-txt-color);
 }
 
 button:hover {
-    color: var(--txt-color-1);
+	color: var(--txt-color-1);
 }
 
 .hidden {
-    visibility: hidden;
+	visibility: hidden;
 }
 
 /*END General*/
@@ -44,21 +50,21 @@ button:hover {
 /*Header*/
 
 header {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin: 10px 0px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	margin: 10px 0px;
 }
 
 .headerLogout {
-    text-align: right;
+	text-align: right;
 }
 
 .headerEmail {
-    text-align: center;
-    margin: 0 4rem 0 4rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	text-align: center;
+	margin: 0 4rem 0 4rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 /*END Header*/
@@ -66,64 +72,64 @@ header {
 /*Login Page*/
 
 .loginLogo {
-    font-size: 300rem;
-    margin: 130rem auto 0 auto;
-    width: 420rem;
-    text-align: center;
-    padding-right: 20rem
+	font-size: 300rem;
+	margin: 130rem auto 0 auto;
+	width: 420rem;
+	text-align: center;
+	padding-right: 20rem;
 }
 
 .gridLogin {
-    margin-top: 20rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15rem;
+	margin-top: 20rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 15rem;
 }
 
 .loginOverlay {
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 2;
 }
 
 .loginExample {
-    background-color: var(--main-fg-color);
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    border: 1px solid var(--txt-color-1);
-    border-radius: 3px;
-    padding: 25rem 30rem 30rem 30rem;
+	background-color: var(--main-fg-color);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border: 1px solid var(--txt-color-1);
+	border-radius: 3px;
+	padding: 25rem 30rem 30rem 30rem;
 }
 
 .loginExampleContainer {
-    padding: 40rem;
-    margin: 20rem 0 20rem 0;
-    background-color: var(--main-bg-color);
-    border-radius: 3px;
+	padding: 40rem;
+	margin: 20rem 0 20rem 0;
+	background-color: var(--main-bg-color);
+	border-radius: 3px;
 }
 
 .loginExamplePwa {
-    text-align: center;
+	text-align: center;
 }
 
 .loginExamplePwaFavicon {
-    border: 1px solid var(--main-txt-color);
-    vertical-align: middle;
-    display: inline-block;
+	border: 1px solid var(--main-txt-color);
+	vertical-align: middle;
+	display: inline-block;
 }
 
 .loginExamplePwaButton {
-    vertical-align: middle;
-    margin-left: 15rem;
-    display: inline-block;
+	vertical-align: middle;
+	margin-left: 15rem;
+	display: inline-block;
 }
 
 /*END Login Page*/
@@ -131,80 +137,90 @@ header {
 /*Login Form*/
 
 .loginForm {
-    background-color: var(--main-fg-color);
-    border: 1px solid var(--txt-color-1);
-    border-radius: 3px;
-    padding: 25rem 30rem 25rem 30rem;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    min-width: 260rem;
-    max-width: 470rem;
-    height: 290rem;
-    cursor: default;
-    z-index: 500;
+	background-color: var(--main-fg-color);
+	border: 1px solid var(--txt-color-1);
+	border-radius: 3px;
+	padding: 25rem 30rem 25rem 30rem;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	min-width: 260rem;
+	max-width: 470rem;
+	height: 290rem;
+	cursor: default;
+	z-index: 500;
 }
 
 .loginFormClose {
-    position: absolute;
-    right: 30rem;
-    font-size: 25rem;
-    z-index: 3;
+	position: absolute;
+	right: 30rem;
+	font-size: 25rem;
+	z-index: 3;
 }
 
-.loginButton, .downloadButton, .createButton, .showLoginFormButton {
-    border: 1px solid var(--main-txt-color);
-    background: none;
-    color: var(--main-txt-color);
-    padding: 2rem 10rem;
-    cursor: pointer;
-    margin-right: 10rem
+.loginButton,
+.downloadButton,
+.createButton,
+.showLoginFormButton {
+	border: 1px solid var(--main-txt-color);
+	background: none;
+	color: var(--main-txt-color);
+	padding: 2rem 10rem;
+	cursor: pointer;
+	margin-right: 10rem;
 }
 
 .showLoginFormButton {
-    padding: 7rem 25rem;
-    font-size: 23rem;
-    margin: 0;
-    display: block;
-    margin: -30rem auto 60rem auto;
+	padding: 7rem 25rem;
+	font-size: 23rem;
+	margin: 0;
+	display: block;
+	margin: -30rem auto 60rem auto;
 }
 
-.loginButton:hover, .downloadButton:hover, .createButton:hover, .showLoginFormButton:hover, .loginButton:focus, .downloadButton:focus, .createButton:focus, .showLoginFormButton:focus {
-    background: var(--main-txt-color);
-    color: var(--main-bg-color);
+.loginButton:hover,
+.downloadButton:hover,
+.createButton:hover,
+.showLoginFormButton:hover,
+.loginButton:focus,
+.downloadButton:focus,
+.createButton:focus,
+.showLoginFormButton:focus {
+	background: var(--main-txt-color);
+	color: var(--main-bg-color);
 }
 
 .loginFormControl {
-    margin-bottom: 10rem;
-    position: relative;
+	margin-bottom: 10rem;
+	position: relative;
 }
 
 .loginFormControl input {
-    border: 0;
-    border-radius: 2px;
-    display: block;
-    width: 200rem;
-    padding: 7px;
-    font-size: 14rem;
-    color: var(--main-bg-color);
+	border: 0;
+	border-radius: 2px;
+	display: block;
+	width: 200rem;
+	padding: 7px;
+	font-size: 14rem;
+	color: var(--main-bg-color);
 }
 
 .form-checkbox {
-    margin-bottom: 30rem;
-    background: none;
+	margin-bottom: 30rem;
+	background: none;
 }
 
 .form-checkbox label {
-    margin-left: 8rem;
-    font-size: 14rem;
+	margin-left: 8rem;
+	font-size: 14rem;
 }
 
 .errorButton {
-    margin-right: 5rem;
-    margin-top: 5rem;
+	margin-right: 5rem;
+	margin-top: 5rem;
 }
 
 /*END Login Form*/
@@ -212,79 +228,79 @@ header {
 /*Login Examples*/
 
 .dots {
-    position: relative;
+	position: relative;
 }
 
 .dot {
-    height: 25px;
-    width: 25px;
-    background-color: var(--txt-color-1);
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-    animation: dotAnim 1s ease-in-out infinite alternate;
+	height: 25px;
+	width: 25px;
+	background-color: var(--txt-color-1);
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	animation: dotAnim 1s ease-in-out infinite alternate;
 }
 
 .dot1 {
-    height: 35px;
-    width: 35px;
-    background-color: var(--txt-color-1);
-    border-radius: 50%;
-    display: inline-block;
-    position: absolute;
+	height: 35px;
+	width: 35px;
+	background-color: var(--txt-color-1);
+	border-radius: 50%;
+	display: inline-block;
+	position: absolute;
 }
 
 .dot2 {
-    float: right;
-    height: 35px;
-    width: 35px;
-    background-color: var(--txt-color-1);
-    border-radius: 50%;
-    position: absolute;
-    right: 0;
+	float: right;
+	height: 35px;
+	width: 35px;
+	background-color: var(--txt-color-1);
+	border-radius: 50%;
+	position: absolute;
+	right: 0;
 }
 
 @keyframes dotAnim {
-    0% {
-        left: 0px;
-        top: 6px;
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        left: calc(100% - 27px);
-        top: 6px;
-    }
+	0% {
+		left: 0px;
+		top: 6px;
+	}
+	50% {
+		transform: scale(1.2);
+	}
+	100% {
+		left: calc(100% - 27px);
+		top: 6px;
+	}
 }
 
 .path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: dash 3s linear infinite;
+	stroke-dasharray: 1000;
+	stroke-dashoffset: 1000;
+	animation: dash 3s linear infinite;
 }
 
 .loginExampleContainer svg {
-    display: block;
-    margin: auto;
+	display: block;
+	margin: auto;
 }
 
 @keyframes dash {
-    from {
-        stroke-dashoffset: 990;
-    }
-    to {
-        stroke-dashoffset: 0;
-    }
+	from {
+		stroke-dashoffset: 990;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
 }
 
 .loginExampleLogGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 8rem;
-    height: fit-content;
-    /*grid-template-rows: 200px;*/
-    grid-template-rows: min-content;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 8rem;
+	height: fit-content;
+	/*grid-template-rows: 200px;*/
+	grid-template-rows: min-content;
 }
 
 /*END Login Examples*/
@@ -292,29 +308,29 @@ header {
 /*PWA Prompt*/
 
 .pwaPrompt {
-    position: fixed;
-    width: 100%;
-    height: 50rem;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--main-fg-color);
-    border-top: 1px solid var(--txt-color-4);
-    z-index: 2;
+	position: fixed;
+	width: 100%;
+	height: 50rem;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: var(--main-fg-color);
+	border-top: 1px solid var(--txt-color-4);
+	z-index: 2;
 }
 
 .pwaButton {
-    margin: 15rem auto 0 auto;
-    display: block;
+	margin: 15rem auto 0 auto;
+	display: block;
 }
 
 .pwaPromptClose {
-    position: absolute;
-    right: 20rem;
-    top: 0;
-    bottom: 0;
-    font-size: 25rem;
-    z-index: 3;
+	position: absolute;
+	right: 20rem;
+	top: 0;
+	bottom: 0;
+	font-size: 25rem;
+	z-index: 3;
 }
 
 /*END PWA Prompt*/
@@ -322,154 +338,157 @@ header {
 /*Main Page*/
 
 .gridStats {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 8rem;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 8rem;
 }
 
 .gridMain {
-    display: flex;
-    margin-top: 20rem;
+	display: flex;
+	margin-top: 20rem;
 }
 
 .logList {
-    flex: 0 0 315px;
+	flex: 0 0 315px;
 }
 
 .stats {
-    flex: 1;
+	flex: 1;
 }
 
 .logEntry {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    border: 1px solid var(--txt-color-3);
-    background-color: var(--main-fg-color);
-    padding: 8px 18px;
-    margin-bottom: 8rem;
-    border-radius: 3px;
-    width: 300px;
-    display: table;
-    table-layout: fixed;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border: 1px solid var(--txt-color-3);
+	background-color: var(--main-fg-color);
+	padding: 8px 18px;
+	margin-bottom: 8rem;
+	border-radius: 3px;
+	width: 300px;
+	display: table;
+	table-layout: fixed;
 }
 
 .logEntryNewEntry {
-    margin-bottom: 0;
-    height: 107rem;
-    cursor: pointer;
+	margin-bottom: 0;
+	height: 86rem;
+	cursor: pointer;
 }
 
 .logEntryNewEntry:hover button {
-    color: var(--txt-color-1);
+	color: var(--txt-color-1);
 }
 
 .logEntryNewEntry button {
-    display: block;
-    margin: 30rem auto 0 auto;
+	display: block;
+	font-size: 20rem;
+	color: var(--txt-color-3);
+	margin: 20rem auto 0 auto;
 }
 
 .logEntryTitle {
-    margin-bottom: 3rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	margin-top: 14rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .logEntryInfo {
-    display: table-cell;
-    width: 85%;
-    border-right: 2px solid var(--main-bg-color);
-    margin: 50px;
-    overflow: hidden;
+	display: table-cell;
+	width: 85%;
+	border-right: 2px solid var(--main-bg-color);
+	margin: 50px;
+	overflow: hidden;
 }
 
-.logEntryInfo:hover h3, .logEntryInfo:focus h3 {
-    color: var(--txt-color-1)
+.logEntryInfo:hover h3,
+.logEntryInfo:focus h3 {
+	color: var(--txt-color-1);
 }
 
 .logEntryAdd {
-    display: table-cell;
-    width: 50rem;
-    vertical-align: middle;
-    text-align: center;
-    padding-left: 12rem;
-    overflow: hidden;
-    font-size: 13rem;
+	display: table-cell;
+	width: 50rem;
+	vertical-align: middle;
+	text-align: center;
+	padding-left: 12rem;
+	overflow: hidden;
+	font-size: 13rem;
 }
 
 .logEntryAdd button {
-    font-size: 50rem;
-    margin-bottom: -15px;
-    cursor: pointer;
+	font-size: 50rem;
+	margin-bottom: -15px;
+	cursor: pointer;
 }
 
 .logEntryAdd button:hover {
-    color: var(--main-txt-color);
-    animation-name: addRotate;
-    animation-duration: 0.3s;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
+	color: var(--main-txt-color);
+	animation-name: addRotate;
+	animation-duration: 0.3s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
 }
 
 @keyframes addRotate {
-    0% {
-        color: var(--txt-color-1);
-    }
-    50% {
-        transform: rotate(-5deg);
-    }
-    100% {
-        transform: rotate(5deg);
-        color: var(--txt-color-1);
-    }
+	0% {
+		color: var(--txt-color-1);
+	}
+	50% {
+		transform: rotate(-5deg);
+	}
+	100% {
+		transform: rotate(5deg);
+		color: var(--txt-color-1);
+	}
 }
 
 .addEntryAnimation {
-    animation-name: addEntryAnimation;
-    animation-duration: 0.3s;
-    animation-direction: alternate;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-out;
+	animation-name: addEntryAnimation;
+	animation-duration: 0.3s;
+	animation-direction: alternate;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-out;
 }
 
 @keyframes addEntryAnimation {
-    0% {
-        filter: blur(2px) brightness(200%) hue-rotate(270deg);
-        /*transform: rotate(5000deg) scale(3.4) skew(50deg);*/
-    }
+	0% {
+		filter: blur(2px) brightness(200%) hue-rotate(270deg);
+		/*transform: rotate(5000deg) scale(3.4) skew(50deg);*/
+	}
 }
 
 .addLoadingAnimation .logEntryAdd button {
-    animation-name: addLoadingAnimation;
-    animation-duration: 0.3s;
-    animation-direction: alternate;
-    animation-iteration-count: 5;
-    animation-timing-function: ease-in-out;
+	animation-name: addLoadingAnimation;
+	animation-duration: 0.3s;
+	animation-direction: alternate;
+	animation-iteration-count: 5;
+	animation-timing-function: ease-in-out;
 }
 
 @keyframes addLoadingAnimation {
-    0% {
-        color: var(--txt-color-1);
-    }
-    100% {
-        color: var(--txt-color-1);
-        transform: rotate(160deg);
-    }
+	0% {
+		color: var(--txt-color-1);
+	}
+	100% {
+		color: var(--txt-color-1);
+		transform: rotate(160deg);
+	}
 }
 
 .viewButton {
-    margin-right: 15rem;
+	margin-right: 15rem;
 }
 
 .viewedLogEntry {
-    border-color: var(--txt-color-1);
+	border-color: var(--txt-color-1);
 }
 
 .viewedLogEntry h3 {
-    color: var(--txt-color-1);
+	color: var(--txt-color-1);
 }
 
 /*END Main Page*/
@@ -477,56 +496,57 @@ header {
 /*LineChart*/
 
 .chartContainer {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    border: 1px solid var(--txt-color-4);
-    margin-bottom: 15rem;
-    background-color: var(--main-fg-color);
-    border-radius: 3px;
-    padding: 10rem 5rem 30rem 20rem;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border: 1px solid var(--txt-color-4);
+	margin-bottom: 15rem;
+	background-color: var(--main-fg-color);
+	border-radius: 3px;
+	padding: 10rem 5rem 30rem 20rem;
 }
 
 .lineChart {
-    height: 400rem;
+	margin-top: 5rem;
+	height: 400rem;
 }
 
 .recharts-wrapper {
-    margin-left: -15rem;
+	margin-left: -15rem;
 }
 
 .recharts-tooltip-wrapper {
-    color: var(--main-txt-color);
-    font-size: 14rem;
+	color: var(--main-txt-color);
+	font-size: 14rem;
 }
 
 .recharts-default-tooltip {
-    background-color: rgba(11, 12, 16, 0.6) !important;
+	background-color: rgba(11, 12, 16, 0.6) !important;
 }
 
 .recharts-legend-wrapper {
-    font-size: 15rem;
-    margin-left: 25rem;
+	font-size: 15rem;
+	margin-left: 25rem;
 }
 
 .viewEntryForm {
-    padding-top: 5rem;
+	padding-top: 5rem;
 }
 
 .viewEntryFormControl {
-    border: 0;
-    border-radius: 2px;
-    height: 30rem;
-    text-align: center;
-    padding: 4rem 15rem 4rem 15rem;
-    font-size: 14rem;
-    margin-right: 5rem;
-    background-color: var(--main-txt-color);
-    color: var(--main-bg-color);
+	border: 0;
+	border-radius: 2px;
+	height: 30rem;
+	text-align: center;
+	padding: 4rem 15rem 4rem 15rem;
+	font-size: 14rem;
+	margin-right: 5rem;
+	background-color: var(--main-txt-color);
+	color: var(--main-bg-color);
 }
 
 .viewEntryFormControl label {
-    margin-right: 5rem;
+	margin-right: 5rem;
 }
 
 /*END LineChart*/
@@ -534,56 +554,56 @@ header {
 /*Heatmap*/
 
 .heatMapContainer {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 10rem 20rem 30rem 20rem;
-    margin-bottom: 15rem;
-    background-color: var(--main-fg-color);
-    border-radius: 3px;
-    border: 1px solid var(--txt-color-4);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 10rem 20rem 30rem 20rem;
+	margin-bottom: 15rem;
+	background-color: var(--main-fg-color);
+	border-radius: 3px;
+	border: 1px solid var(--txt-color-4);
 }
 
 .heatMap {
-    font-size: 12rem;
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-    overflow-x: auto;
+	font-size: 12rem;
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+	overflow-x: auto;
 }
 
 .heatMap th {
-    font-size: 14rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    height: 30rem;
-    text-align: left;
-    font-weight: normal;
-    padding: 15rem 1rem 15rem 5rem;
+	font-size: 14rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 30rem;
+	text-align: left;
+	font-weight: normal;
+	padding: 15rem 1rem 15rem 5rem;
 }
 
 .heatMap th:first-child {
-    width: 120rem;
+	width: 120rem;
 }
 
 .heatMap td {
-    padding: 5rem;
-    overflow: hidden;
+	padding: 5rem;
+	overflow: hidden;
 }
 
 .heatMap td:hover {
-    filter: brightness(110%);
-    color: var(--main-bg-color);
+	filter: brightness(110%);
+	color: var(--main-bg-color);
 }
 
 .heatMap tr {
-    border-bottom: 1px solid var(--main-txt-color);
+	border-bottom: 1px solid var(--main-txt-color);
 }
 
 .heatMapForm {
-    padding-top: 25rem;
+	padding-top: 25rem;
 }
 
 /*END Heatmap*/
@@ -591,97 +611,113 @@ header {
 /*Log View*/
 
 .logViewContainer {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    display: inline-block;
-    padding: 10rem 20rem 30rem 20rem;
-    margin-bottom: 15rem;
-    background-color: var(--main-fg-color);
-    border-radius: 3px;
-    border: 1px solid var(--txt-color-1);
-    vertical-align: top;
-    width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	padding: 15rem 20rem 30rem 20rem;
+	margin-bottom: 15rem;
+	background-color: var(--main-fg-color);
+	border-radius: 3px;
+	border: 1px solid var(--txt-color-1);
+	vertical-align: top;
+	width: 100%;
+	position: relative;
 }
 
 .logViewContainer h2 {
-    color: var(--txt-color-1);
-    text-transform: lowercase;
+	color: var(--txt-color-1);
+	text-transform: lowercase;
 }
 
 .logViewChart {
-    margin-top: 25rem;
+	margin-top: 25rem;
 }
 
 .logViewChartContainer {
-    height: 200rem;
+	height: 200rem;
 }
 
 .logViewEntriesContainer {
-    margin-top: 15rem;
+	margin-top: 25rem;
+}
+.logViewEntriesContainer h4 {
+	margin-bottom: 10rem;
+}
+
+.logViewEntriesContainer li {
+	margin-top: 2rem;
+	list-style: circle;
+}
+
+.removeButton {
+	position: absolute;
+	right: 20rem;
+	top: 15rem;
+	font-size: 25rem;
 }
 
 /*END Log View*/
 
 @media only screen and (max-width: 1000px) {
-    /*General*/
-    #root {
-        margin: 0 8rem;
-    }
-    /*END General*/
-    /*Login*/
-    .loginLogo {
-        font-size: 150rem;
-        margin: auto;
-        width: 220rem;
-        text-align: center;
-        padding-right: 15rem
-    }
-    .showLoginFormButton {
-        padding: 4rem 15rem;
-        font-size: 20rem;
-        margin: 0;
-        display: block;
-        margin: -20rem auto 40rem auto;
-    }
-    .gridLogin {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    .loginExample {
-        padding: 20rem 5rem 30rem 10rem;
-    }
-    .loginExampleContainer {
-        padding: 20rem 10rem 20rem 10rem;
-        margin: 25rem 0 0 0;
-    }
-    /*END Login*/
-    /*Main Page*/
-    .downloadButtonBigScreen {
-        display: none;
-    }
-    .gridStats {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    .heatMapContainer {
-        padding: 10rem 10rem 60rem 10rem;
-    }
-    .chartContainer {
-        padding: 20rem 0 50rem 10rem;
-    }
-    /*END Main Page*/
+	/*General*/
+	#root {
+		margin: 0 8rem;
+	}
+	/*END General*/
+	/*Login*/
+	.loginLogo {
+		font-size: 150rem;
+		margin: auto;
+		width: 220rem;
+		text-align: center;
+		padding-right: 15rem;
+	}
+	.showLoginFormButton {
+		padding: 4rem 15rem;
+		font-size: 20rem;
+		margin: 0;
+		display: block;
+		margin: -20rem auto 40rem auto;
+	}
+	.gridLogin {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	.loginExample {
+		padding: 20rem 5rem 30rem 10rem;
+	}
+	.loginExampleContainer {
+		padding: 20rem 10rem 20rem 10rem;
+		margin: 25rem 0 0 0;
+	}
+	/*END Login*/
+	/*Main Page*/
+	.downloadButtonBigScreen {
+		display: none;
+	}
+	.gridStats {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	.heatMapContainer {
+		padding: 10rem 10rem 60rem 10rem;
+	}
+	.chartContainer {
+		padding: 20rem 0 50rem 10rem;
+	}
+	/*END Main Page*/
 }
 
 @media only screen and (max-width: 700px) {
-    .gridMain {
-        display: block;
-    }
-    .logList {
-        flex: 1;
-    }
-    .logEntry {
-        width: 100%;
-    }
-    .logEntryNewEntry {
-        margin-bottom: 15rem;
-    }
+	.gridMain {
+		display: block;
+	}
+	.logList {
+		flex: 1;
+	}
+	.logEntry {
+		width: 100%;
+	}
+	.logEntryNewEntry {
+		margin-bottom: 15rem;
+	}
 }
