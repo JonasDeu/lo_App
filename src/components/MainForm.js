@@ -5,6 +5,8 @@ import LogView from "./LogView"
 import StatsLineChart from "./StatsLineChart"
 import StatsHeatmap from "./StatsHeatmap"
 import PwaPrompt from "./PwaPrompt"
+import "emoji-mart/css/emoji-mart.css"
+import { Picker } from "emoji-mart"
 
 //TODO
 //No fetch if response.ok
@@ -24,7 +26,9 @@ class MainForm extends React.Component {
 			userData: null,
 			viewedLog: null,
 			deferredPrompt: null,
-			pwaPrompt: true
+			pwaPrompt: true,
+			emojiPicker: false,
+			chosenEmoji: "📒"
 		}
 
 		window.addEventListener("beforeinstallprompt", e => {
@@ -121,14 +125,14 @@ class MainForm extends React.Component {
 
 	addLogHandler = async event => {
 		event.preventDefault()
-		const logPrompt = prompt("Please enter log name", "Bananas")
+		const logPrompt = prompt("Enter log name", "Bananas")
 		if (logPrompt == null || logPrompt === "") {
 			console.log("Enter Log Name!")
 		} else {
 			try {
 				const response = await fetch(url + "/logs", {
 					method: "POST",
-					body: JSON.stringify({ name: logPrompt }),
+					body: JSON.stringify({ name: logPrompt, emoji: this.state.chosenEmoji }),
 					headers: {
 						"Content-Type": "application/json",
 						Authorization: "Bearer " + this.state.token
@@ -165,6 +169,26 @@ class MainForm extends React.Component {
 		}
 	}
 
+	emojiButtonHandler = () => {
+		const emojiMart = document.getElementsByClassName("emoji-mart")[0]
+		if (this.state.emojiPicker) {
+			emojiMart.style.visibility = "hidden"
+			this.setState({ emojiPicker: false })
+		} else {
+			emojiMart.style.visibility = "visible"
+			this.setState({ emojiPicker: true })
+		}
+	}
+
+	emojiChangeHandler = emoji => {
+		const emojiButton = document.getElementsByClassName("emojiButton")[0]
+		const emojiMart = document.getElementsByClassName("emoji-mart")[0]
+		this.setState({ chosenEmoji: emoji.native })
+		emojiButton.innerHTML = emoji.native
+
+		this.emojiButtonHandler()
+	}
+
 	logList = () => {
 		if (this.state.logs) {
 			const logList = this.state.logs.map(log => {
@@ -181,7 +205,8 @@ class MainForm extends React.Component {
 							}}
 							tabIndex="0">
 							<div className="logEntryTitle">
-								<h3 className={color}>{log.name}</h3> {/* Replace by log.color later */}
+								<h3 className={color}>{(log.emoji ? log.emoji : "") + " " + log.name}</h3>
+								{/* Replace by log.color later */}
 							</div>
 						</div>
 						<div className={"logEntryAdd "}>
@@ -198,7 +223,7 @@ class MainForm extends React.Component {
 									? timeDif < 60
 										? timeDif + "min"
 										: Math.round(timeDif / 60) + "h"
-									: "-min"}
+									: "-"}
 							</span>
 						</div>
 					</li>
@@ -208,8 +233,30 @@ class MainForm extends React.Component {
 			return (
 				<ul className="logList">
 					{logList}
-					<li className="logEntry logEntryNewEntry" onClick={this.addLogHandler}>
-						<button key={"addLog"}>+ add new log +</button>
+					<li className="logEntry logEntryNewEntry">
+						<div className="logEntryInfo">
+							<div className="logEntryTitle">
+								<button className="emojiButton" onClick={this.emojiButtonHandler}>
+									<span role="img" aria-label="Emoji Picker"></span>📒
+								</button>
+								<Picker
+									title={"Pick your emoji…"}
+									emoji={"point_up"}
+									native={true}
+									showPreview={false}
+									showSkinTones={false}
+									onSelect={this.emojiChangeHandler}
+								/>
+								<h3>new log</h3>
+							</div>
+						</div>
+						<div className={"logEntryAdd "}>
+							<button className="addEntryButton" onClick={this.addLogHandler}>
+								+
+							</button>
+							<br></br>
+							<span className={"logEntryTimeDif"}>&nbsp;</span>
+						</div>
 					</li>
 				</ul>
 			)

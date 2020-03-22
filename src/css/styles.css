@@ -371,23 +371,6 @@ header {
 	table-layout: fixed;
 }
 
-.logEntryNewEntry {
-	margin-bottom: 0;
-	height: 86rem;
-	cursor: pointer;
-}
-
-.logEntryNewEntry:hover button {
-	color: var(--txt-color-1);
-}
-
-.logEntryNewEntry button {
-	display: block;
-	font-size: 20rem;
-	color: var(--txt-color-3);
-	margin: 20rem auto 0 auto;
-}
-
 .logEntryTitle {
 	margin-top: 14rem;
 	white-space: nowrap;
@@ -403,7 +386,6 @@ header {
 	overflow: hidden;
 }
 
-.logEntryInfo:hover h3,
 .logEntryInfo:focus h3 {
 	color: var(--txt-color-1);
 }
@@ -659,6 +641,54 @@ header {
 
 /*END Log View*/
 
+/*Emoji Mart*/
+
+.logEntryNewEntry {
+	position: relative;
+	margin-bottom: 0;
+	height: 86rem;
+}
+
+.logEntryNewEntry .logEntryInfo:focus h3 {
+	color: var(--txt-color-3);
+}
+
+.emojiButton {
+	font-size: 26rem;
+	border: 1px solid var(--txt-color-3);
+	padding: 3rem;
+	border-radius: 3rem;
+	margin-right: 15rem;
+}
+
+.emoji-mart {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-left: 1px solid var(--txt-color-3);
+	border-bottom: 1px solid var(--txt-color-3);
+	border-right: 1px solid var(--txt-color-3);
+	border-radius: 0 0 3px 3px;
+	position: absolute;
+	visibility: hidden;
+	top: 60rem;
+	left: -1px;
+	width: 300rem !important;
+	margin-bottom: 35rem;
+	z-index: 30;
+	padding: 5rem 0;
+}
+
+.emoji-mart input {
+	color: var(--main-bg-color);
+}
+
+.emoji-mart-scroll {
+	height: 200rem;
+}
+
+/*END Emoji Mart*/
+
 @media only screen and (max-width: 1000px) {
 	/*General*/
 	#root {
@@ -716,6 +746,9 @@ header {
 	}
 	.logEntry {
 		width: 100%;
+	}
+	.emoji-mart {
+		left: 18rem;
 	}
 	.logEntryNewEntry {
 		margin-bottom: 15rem;

@@ -143,7 +143,11 @@ class LogView extends Component {
 	render() {
 		return (
 			<div className="logViewContainer">
-				<h2>{this.state.log ? this.state.log.name : "Log Chart"} </h2>
+				<h2>
+					{this.state.log
+						? (this.state.log.emoji ? this.state.log.emoji + " " : " ") + this.state.log.name
+						: "Log Chart"}
+				</h2>
 				{this.entryTitle()}
 				<div className="logViewChart">
 					<button
