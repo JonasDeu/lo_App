@@ -114,7 +114,6 @@ class LogView extends Component {
 		if (typeof this.state.log === "undefined" || !this.state.log) {
 			return null
 		}
-		console.log(this.state.log)
 		const tempDate = new Date(this.state.log.date)
 		return (
 			" " +
@@ -143,13 +142,6 @@ class LogView extends Component {
 	render() {
 		return (
 			<div className="logViewContainer">
-				<button
-					className="removeButton"
-					onClick={() => {
-						this.props.removeLogHandler(this.state.log._id)
-					}}>
-					✕ Remove
-				</button>
 				<h2>
 					{this.state.log
 						? (this.state.log.emoji ? this.state.log.emoji + " " : " ") + this.state.log.name
@@ -189,6 +181,13 @@ class LogView extends Component {
 						{this.lastFiveEntries()}
 					</div>
 				</div>
+				<button
+					className="removeButton"
+					onClick={() => {
+						this.props.removeLogHandler(this.state.log._id)
+					}}>
+					✕ Remove
+				</button>
 			</div>
 		)
 	}

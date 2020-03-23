@@ -4,6 +4,7 @@
 	--main-bg-color: #1d1f28;
 	--main-fg-color: #282a36;
 	--main-txt-color: #fdfdfd;
+	--main-inactive-color: #adadad;
 	--txt-color-0: #b043d1;
 	--txt-color-1: #18e3c8;
 	--txt-color-2: #ff4971;
@@ -608,7 +609,6 @@ header {
 	border: 1px solid var(--txt-color-1);
 	vertical-align: top;
 	width: 100%;
-	position: relative;
 }
 
 .logViewContainer h2 {
@@ -638,10 +638,8 @@ header {
 }
 
 .removeButton {
-	position: absolute;
-	right: 20rem;
-	top: 15rem;
-	font-size: 20rem;
+	color: var(--main-inactive-color);
+	margin-top: 25rem;
 }
 
 /*END Log View*/
