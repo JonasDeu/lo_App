@@ -240,7 +240,7 @@ class MainForm extends React.Component {
 				{this.state.token && (
 					<div>
 						<hr />
-						<div className="gridMain">
+						<div className="flexMain">
 							{this.logList()}
 
 							<div className="stats">

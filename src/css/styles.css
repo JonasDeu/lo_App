@@ -347,7 +347,7 @@ header {
 	column-gap: 8rem;
 }
 
-.gridMain {
+.flexMain {
 	display: flex;
 	margin-top: 20rem;
 }
@@ -555,18 +555,18 @@ header {
 }
 
 .heatMap th {
-	font-size: 14rem;
+	font-size: 20rem;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	height: 30rem;
 	text-align: left;
 	font-weight: normal;
-	padding: 15rem 1rem 15rem 5rem;
+	padding: 10rem 1rem 10rem 5rem;
 }
 
 .heatMap th:first-child {
-	width: 120rem;
+	width: 60rem;
 }
 
 .heatMap td {
@@ -591,6 +591,11 @@ header {
 
 /*Log View*/
 
+.logViewFlex {
+	margin-top: 25rem;
+	display: flex;
+}
+
 .logViewContainer {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -612,7 +617,8 @@ header {
 }
 
 .logViewChart {
-	margin-top: 25rem;
+	flex: 1;
+	margin-right: 15rem;
 }
 
 .logViewChartContainer {
@@ -620,8 +626,9 @@ header {
 }
 
 .logViewEntriesContainer {
-	margin-top: 25rem;
+	flex: 0 0 300px;
 }
+
 .logViewEntriesContainer h4 {
 	margin-bottom: 10rem;
 }
@@ -746,6 +753,33 @@ header {
 
 /*END New Log Prompt*/
 
+@media only screen and (max-width: 1300px) {
+	/*Log View*/
+	.logViewFlex {
+		display: block;
+	}
+
+	.logViewEntriesContainer {
+		margin-top: 25rem;
+	}
+	/*END Log View*/
+
+	/*Main Page*/
+	.downloadButtonBigScreen {
+		display: none;
+	}
+	.gridStats {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	.heatMapContainer {
+		padding: 10rem 10rem 60rem 10rem;
+	}
+	.chartContainer {
+		padding: 20rem 0 50rem 10rem;
+	}
+	/*END Main Page*/
+}
+
 @media only screen and (max-width: 1000px) {
 	/*General*/
 	#root {
@@ -778,24 +812,10 @@ header {
 		margin: 25rem 0 0 0;
 	}
 	/*END Login*/
-	/*Main Page*/
-	.downloadButtonBigScreen {
-		display: none;
-	}
-	.gridStats {
-		grid-template-columns: repeat(1, 1fr);
-	}
-	.heatMapContainer {
-		padding: 10rem 10rem 60rem 10rem;
-	}
-	.chartContainer {
-		padding: 20rem 0 50rem 10rem;
-	}
-	/*END Main Page*/
 }
 
 @media only screen and (max-width: 700px) {
-	.gridMain {
+	.flexMain {
 		display: block;
 	}
 	.logList {
@@ -807,6 +827,10 @@ header {
 
 	.newLogForm {
 		padding: 25rem 15rem 25rem 15rem;
+	}
+
+	.newLogButton {
+		margin-bottom: 15rem;
 	}
 }
 

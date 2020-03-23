@@ -143,48 +143,51 @@ class LogView extends Component {
 	render() {
 		return (
 			<div className="logViewContainer">
+				<button
+					className="removeButton"
+					onClick={() => {
+						this.props.removeLogHandler(this.state.log._id)
+					}}>
+					✕ Remove
+				</button>
 				<h2>
 					{this.state.log
 						? (this.state.log.emoji ? this.state.log.emoji + " " : " ") + this.state.log.name
 						: "Log Chart"}
 				</h2>
 				{this.entryTitle()}
-				<div className="logViewChart">
-					<button
-						className="removeButton"
-						onClick={() => {
-							this.props.removeLogHandler(this.state.log._id)
-						}}>
-						✕
-					</button>
-					<div className="logViewChartContainer">{this.renderLineChart()}</div>
-					<form className="viewEntryForm" onSubmit={this.handleSubmit}>
-						<input
-							className="viewEntryFormControl"
-							name="Chart Size"
-							type="number"
-							min="1"
-							max="500"
-							value={this.state.chartSize}
-							onChange={this.handleChartSizeChange}
-						/>
-						<select
-							className="viewEntryFormControl"
-							name="Mode"
-							value={this.state.mode}
-							onChange={this.handleModeChange}>
-							<option name="Days" value="day">
-								Days
-							</option>
-							<option name="Hours" value="hour">
-								Hours
-							</option>
-						</select>
-					</form>
-				</div>
-				<div className="logViewEntriesContainer">
-					<h4>Last {this.state.lastEntriesNumber} entries:</h4>
-					{this.lastFiveEntries()}
+
+				<div className="logViewFlex">
+					<div className="logViewChart">
+						<div className="logViewChartContainer">{this.renderLineChart()}</div>
+						<form className="viewEntryForm" onSubmit={this.handleSubmit}>
+							<input
+								className="viewEntryFormControl"
+								name="Chart Size"
+								type="number"
+								min="1"
+								max="500"
+								value={this.state.chartSize}
+								onChange={this.handleChartSizeChange}
+							/>
+							<select
+								className="viewEntryFormControl"
+								name="Mode"
+								value={this.state.mode}
+								onChange={this.handleModeChange}>
+								<option name="Days" value="day">
+									Days
+								</option>
+								<option name="Hours" value="hour">
+									Hours
+								</option>
+							</select>
+						</form>
+					</div>
+					<div className="logViewEntriesContainer">
+						<h4>Last {this.state.lastEntriesNumber} entries:</h4>
+						{this.lastFiveEntries()}
+					</div>
 				</div>
 			</div>
 		)
