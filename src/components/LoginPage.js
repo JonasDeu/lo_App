@@ -1,6 +1,26 @@
 import React, { Component } from "react"
 
 let logoColor = 0
+let timer = null
+let timerLogName = null
+const exampleLogs = [
+	"👵 Call Grandma",
+	"🍕 Pizzas",
+	"🎬 Movies",
+	"🍌 Bananas",
+	"🍔️ Burger",
+	"🥙 Tacos",
+	"📘 Books",
+	"🥑 Avocadoes",
+	"🎷 Sax",
+	"💩 Poop",
+	"🧗‍♀️ Climbing",
+	"⚽ Soccer",
+	"🖌️ Drawing",
+	"🪒 Shaved",
+	"🧹 Cleaned",
+	"✈️ Flights"
+]
 
 class LoginPage extends Component {
 	constructor(props) {
@@ -11,8 +31,18 @@ class LoginPage extends Component {
 			keepLogged: true,
 			error: "",
 			exampleCounter: 0,
-			exampleTime: new Date(Date.now())
+			exampleLog: exampleLogs[Math.floor(Math.random() * exampleLogs.length)]
 		}
+	}
+
+	componentDidMount = () => {
+		this.startTimer()
+		this.startTimerLogName()
+	}
+
+	componentWillUnmount = () => {
+		clearInterval(timer)
+		clearInterval(timerLogName)
 	}
 
 	loginUser = async () => {
@@ -124,8 +154,34 @@ class LoginPage extends Component {
 		this.props.deferredPrompt.prompt()
 	}
 
+	exampleClick = () => {
+		const entry = document.getElementById("exampleEntry")
+		entry.classList.remove("addEntryAnimation")
+		void entry.offsetWidth
+		entry.classList.add("addEntryAnimation")
+
+		this.startTimer()
+	}
+
+	startTimer = () => {
+		clearInterval(timer)
+		const exampleTimer = document.getElementById("exampleTimer")
+		exampleTimer.innerHTML = "0sec"
+		timer = setInterval(() => {
+			let newTime = parseInt(exampleTimer.innerHTML) + 1
+
+			exampleTimer.innerHTML = newTime < 60 ? newTime + "sec" : Math.round(newTime / 60) + "min"
+		}, 1000)
+	}
+
+	startTimerLogName = () => {
+		const exampleLogNames = document.getElementById("exampleLogNames")
+		timerLogName = setInterval(() => {
+			exampleLogNames.innerHTML = exampleLogs[Math.floor(Math.random() * exampleLogs.length)]
+		}, 500)
+	}
+
 	render() {
-		const timeDif = Math.abs(Math.round((this.state.exampleTime - Date.now()) / 60000))
 		return (
 			<React.Fragment>
 				<h1 className={"loginLogo color-" + (logoColor++ % 6)}>lo</h1>
@@ -145,7 +201,8 @@ class LoginPage extends Component {
 							className="loginFormClose"
 							onClick={() => {
 								this.showLoginForm(false)
-							}}>
+							}}
+							type="button">
 							✕
 						</button>
 						<form onSubmit={this.handleSubmit}>
@@ -168,7 +225,7 @@ class LoginPage extends Component {
 									checked={this.state.keepLogged}
 									onChange={this.handleKeepLoggedChange}
 								/>
-								<label>Keep logged in?</label>
+								<label onClick={this.handleKeepLoggedChange}>Stay logged in?</label>
 							</div>
 
 							<input className="loginButton" type="submit" value="Enter" onClick={this.handleEnter} />
@@ -194,53 +251,41 @@ class LoginPage extends Component {
 				<div className="gridLogin">
 					<div className="loginExample">
 						<h2>Keep track of the little things in your life.</h2>
-						<br />
 						<span>
 							Whether it is your occasional cheat meal or the amount of times you call your grandma – lo
 							keeps it all.
 						</span>
 						<div className="loginExampleContainer">
 							<div className="loginExampleLogGrid">
-								<li className="logEntry">
+								<li id="exampleEntry" className="logEntry">
 									<div className="logEntryInfo">
 										<div className="logEntryTitle">
 											<h3 className="color-3">
 												<span role="img" aria-label="example-log">
-													🍕
+													{this.state.exampleLog}
 												</span>
 											</h3>
-											{this.state.exampleCounter + " "}
 										</div>
-										<span>{"since " + this.state.exampleTime.toLocaleDateString()}</span>
-										<br />
-										<button className="removeButton">✕</button>
 									</div>
 									<div className={"logEntryAdd "}>
-										<button
-											className="addEntryButton"
-											onClick={() => {
-												this.setState(prevState => {
-													return {
-														exampleCounter: prevState.exampleCounter + 1,
-														exampleTime: new Date(Date.now())
-													}
-												})
-											}}>
+										<button className="addEntryButton" onClick={this.exampleClick}>
 											+
 										</button>
 										<br></br>
-										<span className={"logEntryTimeDif"}>
-											{timeDif < 60 ? timeDif + "min" : Math.round(timeDif / 60) + "h"}
+										<span id="exampleTimer" className={"logEntryTimeDif"}>
+											0sec
 										</span>
 									</div>
 								</li>
 								<li className="logEntry">
 									<div className="logEntryInfo">
 										<div className="logEntryTitle">
-											<h3 className="color-3">...</h3>
+											<h3 className="color-3">
+												<span id="exampleLogNames" role="img" aria-label="example-log">
+													🎬 Movies
+												</span>
+											</h3>
 										</div>
-										<br />
-										<br />
 									</div>
 									<div className={"logEntryAdd "}>
 										<button className="addEntryButton">+</button>
@@ -254,7 +299,6 @@ class LoginPage extends Component {
 
 					<div className="loginExample">
 						<h2>Analyse and Discover</h2>
-						<br />
 						<span>
 							Watch your data neatly arranged in our graphs. Discover possible correlations via the
 							cross-correlation matrix. Or simply export your data and do your own evaluation.
@@ -275,7 +319,6 @@ class LoginPage extends Component {
 						<h2>
 							Add<span className="color-2"> lo </span>to your homescreen
 						</h2>
-						<br />
 						<span>
 							Install the progressive web app to have easy access on your phone. Click the button below to
 							see if your browser supports it.
@@ -296,7 +339,6 @@ class LoginPage extends Component {
 
 					<div className="loginExample">
 						<h2>Everything - Everywhere</h2>
-						<br />
 						<span>All entries are synced between your devices.</span>
 						<div className="loginExampleContainer">
 							<div className="dots">
