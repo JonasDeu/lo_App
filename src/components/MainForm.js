@@ -14,6 +14,24 @@ import PwaPrompt from "./PwaPrompt"
 //accumulated by Days/Hour in Week Graph
 
 const url = "https://lo-app-api.herokuapp.com"
+const exampleLogs = [
+	"👵 Call Grandma",
+	"🍕 Pizzas",
+	"🎬 Movies",
+	"🍌 Bananas",
+	"🍔️ Burger",
+	"🥙 Tacos",
+	"📘 Books",
+	"🥑 Avocadoes",
+	"🎷 Sax",
+	"💩 Poop",
+	"🧗‍♀️ Climbing",
+	"⚽ Soccer",
+	"🖌️ Drawing",
+	"🪒 Shaved",
+	"🧹 Cleaned",
+	"✈️ Flights"
+]
 
 class MainForm extends React.Component {
 	constructor(props) {
@@ -200,6 +218,7 @@ class MainForm extends React.Component {
 							token={this.state.token}
 							getLogs={this.getLogs}
 							newLogPromptHandler={this.newLogPromptHandler}
+							exampleLogs={exampleLogs}
 						/>
 					)}
 				</ul>
@@ -235,7 +254,11 @@ class MainForm extends React.Component {
 				{this.state.token ? (
 					<Header userData={this.state.userData} setLogin={this.setLogin} />
 				) : (
-					<LoginPage setLogin={this.setLogin} deferredPrompt={this.state.deferredPrompt} />
+					<LoginPage
+						setLogin={this.setLogin}
+						deferredPrompt={this.state.deferredPrompt}
+						exampleLogs={exampleLogs}
+					/>
 				)}
 				{this.state.token && (
 					<div>

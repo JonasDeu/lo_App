@@ -61,6 +61,15 @@ class NewLog extends Component {
 		event.preventDefault()
 	}
 
+	reloadExampleName = () => {
+		const newExample = this.props.exampleLogs[Math.floor(Math.random() * this.props.exampleLogs.length)]
+		this.setState({
+			chosenEmoji: newExample.split(" ")[0],
+
+			logName: newExample.substr(newExample.indexOf(" ") + 1)
+		})
+	}
+
 	render() {
 		return (
 			<li className="newLogOverlay">
@@ -75,6 +84,10 @@ class NewLog extends Component {
 					</button>
 
 					<h2>Add new Log</h2>
+					<button className="reloadButton" onClick={this.reloadExampleName}>
+						&#x21bb;
+					</button>
+					<br />
 
 					<button className="emojiButton" type="button" onClick={this.handleEmojiButton}>
 						<span role="img" aria-label="Emoji Picker">
@@ -96,7 +109,8 @@ class NewLog extends Component {
 						type="text"
 						spellCheck="false"
 						autoFocus
-						onChange={this.handleNameChange}></input>
+						onChange={this.handleNameChange}
+						value={this.state.logName}></input>
 
 					<button className="newLogButtonSubmit" onClick={this.handleCreation}>
 						Create

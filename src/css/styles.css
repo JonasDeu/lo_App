@@ -688,8 +688,13 @@ header {
 }
 
 .newLogForm h2 {
-	display: block;
+	display: inline-block;
 	margin-bottom: 15rem;
+}
+
+.reloadButton {
+	font-size: 26rem;
+	margin-left: 15rem;
 }
 
 .newLogForm input {
@@ -834,5 +839,8 @@ header {
 @media (hover: none) {
 	.logEntryAdd button:hover {
 		animation-name: none;
+	}
+	.reloadButton:hover {
+		color: var(--main-txt-color);
 	}
 }

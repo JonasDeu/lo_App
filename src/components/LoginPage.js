@@ -3,24 +3,6 @@ import React, { Component } from "react"
 let logoColor = 0
 let timer = null
 let timerLogName = null
-const exampleLogs = [
-	"👵 Call Grandma",
-	"🍕 Pizzas",
-	"🎬 Movies",
-	"🍌 Bananas",
-	"🍔️ Burger",
-	"🥙 Tacos",
-	"📘 Books",
-	"🥑 Avocadoes",
-	"🎷 Sax",
-	"💩 Poop",
-	"🧗‍♀️ Climbing",
-	"⚽ Soccer",
-	"🖌️ Drawing",
-	"🪒 Shaved",
-	"🧹 Cleaned",
-	"✈️ Flights"
-]
 
 class LoginPage extends Component {
 	constructor(props) {
@@ -31,7 +13,7 @@ class LoginPage extends Component {
 			keepLogged: true,
 			error: "",
 			exampleCounter: 0,
-			exampleLog: exampleLogs[Math.floor(Math.random() * exampleLogs.length)]
+			exampleLog: this.props.exampleLogs[Math.floor(Math.random() * this.props.exampleLogs.length)]
 		}
 	}
 
@@ -177,7 +159,9 @@ class LoginPage extends Component {
 	startTimerLogName = () => {
 		const exampleLogNames = document.getElementById("exampleLogNames")
 		timerLogName = setInterval(() => {
-			exampleLogNames.innerHTML = exampleLogs[Math.floor(Math.random() * exampleLogs.length)]
+			exampleLogNames.innerHTML = this.props.exampleLogs[
+				Math.floor(Math.random() * this.props.exampleLogs.length)
+			]
 		}, 500)
 	}
 
