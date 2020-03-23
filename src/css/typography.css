@@ -18,21 +18,19 @@ h1 {
 
 h2 {
 	font-size: 24rem;
-	display: inline;
 	color: var(--main-txt-color);
+	margin-bottom: 10rem;
 }
 
 h3 {
 	font-size: 26rem;
 	display: inline;
 	margin-right: 5rem;
-	text-transform: lowercase;
 	color: var(--txt-color-3);
 }
 
 h4 {
 	font-size: 20rem;
-	text-transform: lowercase;
 }
 
 .errorMessage {

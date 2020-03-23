@@ -119,15 +119,18 @@ class StatsHeatmap extends Component {
 		})
 
 		return (
-			<table className="heatMap">
-				<thead>
-					<tr>
-						<th>Correlation</th>
-						{heading}
-					</tr>
-				</thead>
-				<tbody>{body}</tbody>
-			</table>
+			<React.Fragment>
+				<h2>Correlation Matrix</h2>
+				<table className="heatMap">
+					<thead>
+						<tr>
+							<th></th>
+							{heading}
+						</tr>
+					</thead>
+					<tbody>{body}</tbody>
+				</table>
+			</React.Fragment>
 		)
 	}
 

@@ -121,6 +121,7 @@ class StatsLineChart extends Component {
 			<React.Fragment>
 				{this.props.logs && this.props.logs.length !== 0 && (
 					<div className="chartContainer">
+						<h2>Timeline Combined</h2>
 						<div className="lineChart">{this.renderCombLineChart()}</div>
 						<form className="viewEntryForm" onSubmit={this.handleSubmit}>
 							<input
